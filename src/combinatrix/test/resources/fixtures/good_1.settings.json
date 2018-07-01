@@ -1,0 +1,66 @@
+{
+	"parameters" : [
+		{
+			"name" : "test_id",
+			"type" : "index"
+		},
+		{
+			"name" : "field1",
+			"type" : "generated",
+			"values" : {
+				"a" : {
+					"constraints" : {
+						"field2" : ["d"]
+					}
+				},
+				"b" : {}
+			}
+		},
+		{
+			"name" : "field2",
+			"type" : "generated",
+			"values" : {
+				"c" : {},
+				"d" : {
+					"constraints" : {
+						"field1" : ["a"]
+					}
+				}
+			}
+		},
+		{
+			"name" : "condition1",
+			"type" : "conditional",
+			"default" : "",
+			"values" : {
+				"e" :{
+					"conditions" : [
+						{ "field1" : ["a"] }
+					]
+				},
+				"f" : {
+					"conditions" : [
+						{ "field2" : ["c"] }
+					]
+				}
+			}
+		},
+		{
+			"name" : "condition2",
+			"type" : "conditional",
+			"default" : "no",
+			"values" : {
+				"g" :{
+					"conditions" : [
+						{ "field1" : ["b"] }
+					]
+				},
+				"h" : {
+					"conditions" : [
+						{ "field2" : ["d"] }
+					]
+				}
+			}
+		}
+	]
+}

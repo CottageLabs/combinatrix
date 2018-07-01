@@ -1,0 +1,34 @@
+field,test_id,application,application_status,account,prov,current_journal,note,save,raises
+type,index,generated,generated,generated,generated,generated,generated,generated,conditional
+default,,,,,,,,,
+,,,,,,,,,
+values,,none,-,none,none,-,yes,success,ArgumentException
+values,,exists,rejected,publisher,true,yes,no,fail,AuthoriseException
+values,,,accepted,admin,false,no,,,SaveException
+values,,,update_request,,,,,,
+,,,,,,,,,
+constraint application,,none,-,*,*,-,*,success,
+constraint application,,exists,*,*,*,*,*,*,
+constraint application_status,,none,-,*,*,*,*,*,
+constraint application_status,,exists,rejected,*,*,*,*,*,
+constraint application_status,,exists,accepted,*,*,*,*,*,
+constraint application_status,,exists,update_request,*,*,*,*,*,
+constraint account,,*,*,none,*,*,*,*,
+constraint account,,*,*,publisher,*,*,*,*,
+constraint account,,*,*,admin,*,*,*,*,
+constraint prov,,*,*,*,none,*,*,*,
+constraint prov,,*,*,*,true,*,*,*,
+constraint prov,,*,*,*,false,*,*,*,
+constraint current_journal,,none,*,*,*,-,*,*,
+constraint current_journal,,exists,*,*,*,yes,*,*,
+constraint current_journal,,exists,*,*,*,no,*,*,
+constraint note,,*,*,*,*,*,yes,*,
+constraint note,,*,*,*,*,*,no,*,
+constraint save,,*,*,*,*,*,*,success,
+constraint save,,exists,*,*,*,*,*,fail,
+,,,,,,,,,
+condition raises,,none,*,*,*,*,*,*,ArgumentException
+condition raises,,*,*,none,*,*,*,*,ArgumentException
+condition raises,,*,*,*,none,*,*,*,ArgumentException
+condition raises,,exists,*,publisher,*,*,*,*,AuthoriseException
+condition raises,,*,*,*,*,*,*,fail,SaveException

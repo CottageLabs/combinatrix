@@ -1,0 +1,84 @@
+{
+  "parameters": [
+    {
+      "type": "index", 
+      "name": "test_id"
+    }, 
+    {
+      "values": {
+        "none": {
+          "constraints": {
+            "save": [
+              "success"
+            ]
+          }
+        }, 
+        "exists": {}
+      }, 
+      "type": "generated", 
+      "name": "application"
+    }, 
+    {
+      "values": {
+        "update_request": {}, 
+        "accepted": {}, 
+        "-": {}, 
+        "rejected": {}
+      }, 
+      "type": "generated", 
+      "name": "application_status"
+    }, 
+    {
+      "values": {
+        "admin": {}, 
+        "publisher": {}, 
+        "none": {}
+      }, 
+      "type": "generated", 
+      "name": "account"
+    }, 
+    {
+      "values": {
+        "false": {}, 
+        "none": {}, 
+        "true": {}
+      }, 
+      "type": "generated", 
+      "name": "prov"
+    }, 
+    {
+      "values": {
+        "yes": {}, 
+        "-": {}, 
+        "no": {}
+      }, 
+      "type": "generated", 
+      "name": "current_journal"
+    }, 
+    {
+      "values": {
+        "yes": {}, 
+        "no": {}
+      }, 
+      "type": "generated", 
+      "name": "note"
+    }, 
+    {
+      "values": {
+        "fail": {}, 
+        "success": {}
+      }, 
+      "type": "generated", 
+      "name": "save"
+    }, 
+    {
+      "values": {
+        "ArgumentException": {}, 
+        "SaveException": {}, 
+        "AuthoriseException": {}
+      }, 
+      "type": "conditional", 
+      "name": "raises"
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+{
+	"parameters" : [
+		{
+			"name" : "test_id",
+			"type" : "index"
+		},
+		{
+			"name" : "application",
+			"type" : "generated",
+			"values" : {
+				"none" : {
+					"constraints" : {
+						"application_status" : ["-"],
+						"current_journal" : ["-"],
+						"save" : ["success"]
+					}
+				},
+				"exists" : {}
+			}
+		},
+		{
+			"name" : "application_status",
+			"type" : "generated",
+			"values" :  {
+				"-" : {
+					"constraints" : {
+						"application" : ["none"]
+					}
+				},
+				"rejected" : {
+					"constraints" : {
+						"application" : ["exists"]
+					}
+				},
+				"accepted" : {
+					"constraints" : {
+						"application" : ["exists"]
+					}
+				},
+				"update_request" : {
+					"constraints" : {
+						"application" : ["exists"]
+					}
+				}
+			}
+		},
+		{
+			"name" : "account",
+			"type" : "generated",
+			"values" : {
+				"none" : {},
+				"publisher" : {},
+				"admin" : {}
+			}
+		},
+		{
+			"name" : "prov",
+			"type" : "generated",
+			"values" : {
+				"none" : {},
+				"true" : {},
+				"false" : {}
+			}
+		},
+		{
+			"name" : "current_journal",
+			"type" : "generated",
+			"values" : {
+				"-" : {
+					"constraints" : {
+						"application" : ["none"]
+					}
+				},
+				"yes" : {
+					"constraints" : {
+						"application" : ["exists"]
+					}
+				},
+				"no" : {
+					"constraints" : {
+						"application" : ["exists"]
+					}
+				}
+			}
+		},
+		{
+			"name" : "note",
+			"type" : "generated",
+			"values" : {
+				"yes" : {},
+				"no" : {}
+			}
+		},
+		{
+			"name" : "save",
+			"type" : "generated",
+			"values" : {
+				"success" : {},
+				"fail" : {
+					"constraints" : {
+            			"application" : ["exists"]
+					}
+				}
+			}
+		},
+		{
+			"name" : "raises",
+			"type" : "conditional",
+			"default" : "",
+			"values" : {
+				"ArgumentException" : {
+					"conditions" : [
+						{ "application" : ["none"] },
+						{ "account" : ["none"] },
+						{ "prov" :  ["none"] }
+					]
+				},
+				"AuthoriseException" : {
+					"conditions" : [
+						{
+							"application" : ["exists"],
+							"account" : ["publisher"]
+						}
+					]
+				},
+				"SaveException" : {
+					"conditions" : [
+						{ "save" : ["fail"] }
+					]
+				}
+			}
+		}
+	]
+}

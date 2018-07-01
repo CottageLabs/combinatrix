@@ -1,0 +1,174 @@
+{
+  "parameters": [
+    {
+      "type": "index", 
+      "name": "test_id"
+    }, 
+    {
+      "values": {
+        "none": {
+          "constraints": {
+            "csv_state": [
+              "-"
+            ]
+          }
+        }, 
+        "exists": {
+          "constraints": {
+            "csv_state": [
+              "good_1", 
+              "not_csv", 
+              "wrong_first_row"
+            ]
+          }
+        }, 
+        "missing": {
+          "constraints": {
+            "csv_state": [
+              "-"
+            ]
+          }
+        }
+      }, 
+      "type": "generated", 
+      "name": "csv_path"
+    }, 
+    {
+      "values": {
+        "available": {}, 
+        "none": {}, 
+        "missing_dir": {}
+      }, 
+      "type": "generated", 
+      "name": "params_out_path"
+    }, 
+    {
+      "values": {
+        "good_1": {
+          "constraints": {
+            "csv_path": [
+              "exists"
+            ]
+          }
+        }, 
+        "wrong_first_row": {
+          "constraints": {
+            "csv_path": [
+              "exists"
+            ]
+          }
+        }, 
+        "-": {
+          "constraints": {
+            "csv_path": [
+              "none", 
+              "missing"
+            ]
+          }
+        }, 
+        "not_csv": {
+          "constraints": {
+            "csv_path": [
+              "exists"
+            ]
+          }
+        }
+      }, 
+      "type": "generated", 
+      "name": "csv_state"
+    }, 
+    {
+      "default": "no", 
+      "values": {
+        "yes": {
+          "conditions": [
+            {
+              "params_out_path": [
+                "available"
+              ], 
+              "csv_path": [
+                "exists"
+              ], 
+              "csv_state": [
+                "good_1"
+              ]
+            }
+          ]
+        }, 
+        "no": {}
+      }, 
+      "type": "conditional", 
+      "name": "params_written"
+    }, 
+    {
+      "default": "-", 
+      "values": {
+        "good_1": {
+          "conditions": [
+            {
+              "params_out_path": [
+                "none"
+              ], 
+              "csv_path": [
+                "exists"
+              ], 
+              "csv_state": [
+                "good_1"
+              ]
+            }, 
+            {
+              "params_out_path": [
+                "available"
+              ], 
+              "csv_path": [
+                "exists"
+              ], 
+              "csv_state": [
+                "good_1"
+              ]
+            }
+          ]
+        }, 
+        "-": {}
+      }, 
+      "type": "conditional", 
+      "name": "compare_params"
+    }, 
+    {
+      "default": "", 
+      "values": {
+        "CombinatrixException": {
+          "conditions": [
+            {
+              "csv_path": [
+                "none"
+              ]
+            }, 
+            {
+              "csv_path": [
+                "missing"
+              ]
+            }, 
+            {
+              "params_out_path": [
+                "missing_dir"
+              ]
+            }, 
+            {
+              "csv_state": [
+                "wrong_first_row"
+              ]
+            }, 
+            {
+              "csv_state": [
+                "not_csv"
+              ]
+            }
+          ]
+        }
+      }, 
+      "type": "conditional", 
+      "name": "raises"
+    }
+  ]
+}

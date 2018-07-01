@@ -1,0 +1,16 @@
+type,index,generated,generated,conditional,conditional
+field,test_id,field1,field2,condition1,condition2
+default,,,,,no
+,,,,,
+values,,a,c,e,g
+values,,b,d,f,h
+,,,,,
+constraint field1,,a,d,,
+constraint field1,,b,*,,
+constraint field2,,*,c,,
+constraint field2,,a,d,,
+,,,,,
+conditional condition1,,a,,e,
+conditional condition1,,,c,f,
+conditional condition2,,b,,,g
+conditional condition2,,,d,,h

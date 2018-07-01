@@ -1,0 +1,184 @@
+{
+  "parameters": [
+    {
+      "default": "", 
+      "type": "index", 
+      "name": "test_id"
+    }, 
+    {
+      "default": "", 
+      "values": {
+        "none": {
+          "constraints": {
+            "save": [
+              "success"
+            ], 
+            "current_journal": [
+              "-"
+            ], 
+            "application_status": [
+              "-"
+            ]
+          }
+        }, 
+        "exists": {}
+      }, 
+      "type": "generated", 
+      "name": "application"
+    }, 
+    {
+      "default": "", 
+      "values": {
+        "update_request": {
+          "constraints": {
+            "application": [
+              "exists"
+            ]
+          }
+        }, 
+        "accepted": {
+          "constraints": {
+            "application": [
+              "exists"
+            ]
+          }
+        }, 
+        "-": {
+          "constraints": {
+            "application": [
+              "none"
+            ]
+          }
+        }, 
+        "rejected": {
+          "constraints": {
+            "application": [
+              "exists"
+            ]
+          }
+        }
+      }, 
+      "type": "generated", 
+      "name": "application_status"
+    }, 
+    {
+      "default": "", 
+      "values": {
+        "admin": {}, 
+        "publisher": {}, 
+        "none": {}
+      }, 
+      "type": "generated", 
+      "name": "account"
+    }, 
+    {
+      "default": "", 
+      "values": {
+        "false": {}, 
+        "none": {}, 
+        "true": {}
+      }, 
+      "type": "generated", 
+      "name": "prov"
+    }, 
+    {
+      "default": "", 
+      "values": {
+        "yes": {
+          "constraints": {
+            "application": [
+              "exists"
+            ]
+          }
+        }, 
+        "-": {
+          "constraints": {
+            "application": [
+              "none"
+            ]
+          }
+        }, 
+        "no": {
+          "constraints": {
+            "application": [
+              "exists"
+            ]
+          }
+        }
+      }, 
+      "type": "generated", 
+      "name": "current_journal"
+    }, 
+    {
+      "default": "", 
+      "values": {
+        "yes": {}, 
+        "no": {}
+      }, 
+      "type": "generated", 
+      "name": "note"
+    }, 
+    {
+      "default": "", 
+      "values": {
+        "fail": {
+          "constraints": {
+            "application": [
+              "exists"
+            ]
+          }
+        }, 
+        "success": {}
+      }, 
+      "type": "generated", 
+      "name": "save"
+    }, 
+    {
+      "default": "", 
+      "values": {
+        "ArgumentException": {
+          "conditions": [
+            {
+              "application": [
+                "none"
+              ]
+            }, 
+            {
+              "account": [
+                "none"
+              ]
+            }, 
+            {
+              "prov": [
+                "none"
+              ]
+            }
+          ]
+        }, 
+        "SaveException": {
+          "conditions": [
+            {
+              "save": [
+                "fail"
+              ]
+            }
+          ]
+        }, 
+        "AuthoriseException": {
+          "conditions": [
+            {
+              "application": [
+                "exists"
+              ], 
+              "account": [
+                "publisher"
+              ]
+            }
+          ]
+        }
+      }, 
+      "type": "conditional", 
+      "name": "raises"
+    }
+  ]
+}
