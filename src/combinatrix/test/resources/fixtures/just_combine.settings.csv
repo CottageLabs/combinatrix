@@ -1,0 +1,6 @@
+field,test_id,field1,field2
+type,index,generated,generated
+default,,,
+,,,
+values,,a,c
+values,,b,d

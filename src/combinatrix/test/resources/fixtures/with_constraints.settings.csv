@@ -1,0 +1,11 @@
+field,test_id,field1,field2
+type,index,generated,generated
+default,,,
+,,,
+values,,a,c
+values,,b,d
+,,,
+constraint field1,,a,d
+constraint field1,,b,*
+constraint field2,,*,c
+constraint field2,,a,d

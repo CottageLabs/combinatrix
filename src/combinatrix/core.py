@@ -191,6 +191,14 @@ def fromjsonfile(json_path, out_path):
 
 
 def combine(parameters, out_path):
+    # validate the input
+    if parameters is None or out_path is None:
+        raise CombinatrixException("parameters and out_path must be set")
+
+    out_dir = os.path.dirname(out_path)
+    if not os.path.exists(out_dir):
+        raise CombinatrixException("Directory {x} does not exist for output path".format(x=out_dir))
+
     # get all the fields that we're going to use to generate the first set
     # this is the list of field names where the type is "generate" (or not set)
     fields = [p for p in parameters.get("parameters", []) if p.get("type", GENERATED) == GENERATED]
@@ -309,7 +317,7 @@ def _add_conditionals(combo, conditionals):
 
 def _add_index(combo, indices, current_index):
     for field in indices:
-        combo[field.get("name")] = current_index
+        combo[field.get("name")] = unicode(current_index)
     return current_index + 1
 
 

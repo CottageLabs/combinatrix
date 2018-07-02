@@ -1,6 +1,6 @@
 import unittest, os
 from parameterized import parameterized
-from testintegration import load_parameter_sets, rel2abs
+from combinatrix.testintegration import load_parameter_sets, rel2abs
 from combinatrix.core import CombinatrixException, convert_csv
 from combinatrix.test.fixtures.settings_csv import SettingsCSVFactory
 from combinatrix.test.fixtures.settings_json import SettingsJSONFactory
@@ -20,7 +20,7 @@ CSV_PATHS = {
 PARAMS_OUT_PATHS = {
     "none" : None,
     "missing_dir" : rel2abs(__file__, "path", "does", "not", "exist"),
-    "available" : rel2abs(__file__, "..", "resources", "tmp", "test_convert_csv.csv")
+    "available" : rel2abs(__file__, "..", "resources", "tmp", "test_convert_csv.json")
 }
 
 class TestConvertCsv(unittest.TestCase):
@@ -29,6 +29,10 @@ class TestConvertCsv(unittest.TestCase):
         super(TestConvertCsv, self).setUp()
 
     def tearDown(self):
+        available = PARAMS_OUT_PATHS["available"]
+        if os.path.exists(available):
+            os.remove(available)
+
         super(TestConvertCsv, self).tearDown()
 
     @parameterized.expand(load_cases)

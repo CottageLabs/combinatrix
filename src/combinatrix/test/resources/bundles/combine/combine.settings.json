@@ -1,0 +1,104 @@
+{
+  "parameters": [
+    {
+      "type": "index", 
+      "name": "test_id"
+    }, 
+    {
+      "values": {
+        "none": {}, 
+        "with_constraints": {}, 
+        "with_conditionals": {}, 
+        "malformed": {}, 
+        "good_1": {}, 
+        "just_combine": {}
+      }, 
+      "type": "generated", 
+      "name": "parameters"
+    }, 
+    {
+      "values": {
+        "available": {}, 
+        "none": {}, 
+        "missing_dir": {}
+      }, 
+      "type": "generated", 
+      "name": "out_path"
+    }, 
+    {
+      "default": "-", 
+      "values": {
+        "just_combine": {
+          "conditions": [
+            {
+              "parameters": [
+                "just_combine"
+              ]
+            }
+          ]
+        }, 
+        "with_constraints": {
+          "conditions": [
+            {
+              "parameters": [
+                "with_constraints"
+              ]
+            }
+          ]
+        }, 
+        "good_1": {
+          "conditions": [
+            {
+              "parameters": [
+                "good_1"
+              ]
+            }
+          ]
+        }, 
+        "-": {}, 
+        "with_conditionals": {
+          "conditions": [
+            {
+              "parameters": [
+                "with_conditionals"
+              ]
+            }
+          ]
+        }
+      }, 
+      "type": "conditional", 
+      "name": "check_matrix"
+    }, 
+    {
+      "default": "", 
+      "values": {
+        "CombinatrixException": {
+          "conditions": [
+            {
+              "parameters": [
+                "none"
+              ]
+            }, 
+            {
+              "parameters": [
+                "malformed"
+              ]
+            }, 
+            {
+              "out_path": [
+                "none"
+              ]
+            }, 
+            {
+              "out_path": [
+                "missing_dir"
+              ]
+            }
+          ]
+        }
+      }, 
+      "type": "conditional", 
+      "name": "raises"
+    }
+  ]
+}

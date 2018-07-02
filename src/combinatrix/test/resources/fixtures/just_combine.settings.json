@@ -1,0 +1,24 @@
+{
+  "parameters": [
+    {
+      "type": "index", 
+      "name": "test_id"
+    }, 
+    {
+      "values": {
+        "a": {}, 
+        "b": {}
+      }, 
+      "type": "generated", 
+      "name": "field1"
+    }, 
+    {
+      "values": {
+        "c": {}, 
+        "d": {}
+      }, 
+      "type": "generated", 
+      "name": "field2"
+    }
+  ]
+}
