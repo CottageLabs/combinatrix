@@ -295,8 +295,8 @@ def _filter(combo, fields):
 
 def _add_conditionals(combo, conditionals):
     for field in conditionals:
+        possible_values = []
         for val, conditions in field.get("values", {}).iteritems():
-            tripped = False
             if "conditions" not in conditions:
                 continue
             for match_group in conditions["conditions"]:
@@ -305,13 +305,15 @@ def _add_conditionals(combo, conditionals):
                     if combo[other_field] in other_values:
                         trips += 1
                 if trips == len(match_group.keys()):
-                    combo[field.get("name")] = val
-                    tripped = True
+                    possible_values.append(val)
                     break
-            if tripped:
-                break
-            else:
-                combo[field.get("name")] = field.get("default", "")
+        possible_values = list(set(possible_values))
+        if len(possible_values) == 0:
+            combo[field.get("name")] = field.get("default", "")
+        elif len(possible_values) == 1:
+            combo[field.get("name")] = possible_values[0]
+        else:
+            raise CombinatrixException("More than one possible value for {x}".format(x=field.get("name")))
     return
 
 

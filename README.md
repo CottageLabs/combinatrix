@@ -550,3 +550,63 @@ For example, the final row in the following table adds a condition such that `co
 |       |         |        |        |            |            |
 | conditional condition1 | | a |    | yes        |            |
 
+
+## Test Integration
+
+Combinatrix is designed to allow you to plug combinations directly into parameterised tests, and it does this through the concept of a
+test "bundle".
+
+Each bundle consists of one or both of a settings CSV and settings JSON, and the resulting test matrix itself.
+
+To execute a test based on a test bundle, we can use [parameterized](https://github.com/wolever/parameterized) as follows:
+
+
+```python
+import unittest
+from parameterized import parameterized
+from combinatrix.testintegration import load_parameter_sets, rel2abs
+
+def load_cases():
+    return load_parameter_sets(rel2abs(__file__, "..", "resources", "bundles", "combine"), "combine", "test_id", {"test_id" : []})
+
+class TestCombine(unittest.TestCase):
+
+    @parameterized.expand(load_cases)
+    def test_combine(self, name, kwargs):
+        pass
+```
+
+Here we have defined a test class called `TestCombine` which extends the `unittest.TestCase`.  In turn this contains a single test function
+called `test_combine` which takes two arguments:
+
+* name - the name of the test
+* kwargs - a dictionary of arguments for the test
+
+This function is annotated with `@parameterized.expand(load_cases)`.  This is a feature of *parameterized* which will load the test cases
+from the supplied function, and inject them into the test class at run-time.
+
+We therefore have also defined a function called `load_cases` which uses Combinatrix to deliver the test cases.
+
+
+### Loading Parameter Sets
+
+There is a function provided which can load parameter sets and pass them to *parameterized*:
+
+```python
+from combinatrix.testintegration import load_parameter_sets, rel2abs
+
+def load_cases():
+    return load_parameter_sets(rel2abs(__file__, "..", "resources", "bundles", "combine"), "combine", "test_id")
+```
+
+`load_parameter_sets` is invoked with the following arguments:
+
+* The path to the test "bundle" for this test
+* The name of the test "bundle"
+* The field in the test matrix which will define the name of the test
+* An optional filter which will allow us to limit the parameter sets to a subset of the total
+
+Note also we provide a convenience function `rel2abs` which allows us to convert relative paths to absolue paths easily.
+
+The above example loads a bundle called **combine** from the directory **../resources/bundles/combine**.  It tells us that the field
+**test_id** is the field that will uniquely name each test, and it applies a filter

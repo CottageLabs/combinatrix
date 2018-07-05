@@ -7,6 +7,7 @@ values,,malformed,missing_dir,just_combine,
 values,,just_combine,available,with_constraints,
 values,,with_constraints,,with_conditionals,
 values,,with_conditionals,,good_1,
+values,,with_conflict,,,
 values,,good_1,,,
 ,,,,,
 conditional check_matrix,,just_combine,,just_combine,
@@ -18,3 +19,4 @@ conditional raises,,none,,,CombinatrixException
 conditional raises,,malformed,,,CombinatrixException
 conditional raises,,,none,,CombinatrixException
 conditional raises,,,missing_dir,,CombinatrixException
+conditional raises,,with_conflict,,,CombinatrixException

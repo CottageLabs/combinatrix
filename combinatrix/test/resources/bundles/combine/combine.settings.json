@@ -7,6 +7,7 @@
     {
       "values": {
         "none": {}, 
+        "with_conflict": {}, 
         "with_constraints": {}, 
         "with_conditionals": {}, 
         "malformed": {}, 
@@ -92,6 +93,11 @@
             {
               "out_path": [
                 "missing_dir"
+              ]
+            }, 
+            {
+              "parameters": [
+                "with_conflict"
               ]
             }
           ]

@@ -1,0 +1,58 @@
+{
+  "parameters": [
+    {
+      "type": "index", 
+      "name": "test_id"
+    }, 
+    {
+      "values": {
+        "a": {}, 
+        "b": {}
+      }, 
+      "type": "generated", 
+      "name": "field1"
+    }, 
+    {
+      "values": {
+        "c": {}, 
+        "d": {}
+      }, 
+      "type": "generated", 
+      "name": "field2"
+    }, 
+    {
+      "default": "f", 
+      "values": {
+        "e": {
+          "conditions": [
+            {
+              "field1": [
+                "a"
+              ]
+            }
+          ]
+        }, 
+        "f": {}
+      }, 
+      "type": "conditional", 
+      "name": "condition1"
+    }, 
+    {
+      "default": "g", 
+      "values": {
+        "h": {
+          "conditions": [
+            {
+              "field2": [
+                "d"
+              ]
+            }
+          ]
+        }, 
+        "g": {}
+      }, 
+      "type": "conditional", 
+      "name": "condition2"
+    }
+  ]
+}
