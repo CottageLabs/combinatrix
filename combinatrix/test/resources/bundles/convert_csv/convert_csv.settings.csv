@@ -1,31 +1,29 @@
-field,test_id,csv_path,params_out_path,csv_state,params_written,compare_params,raises
-type,index,generated,generated,generated,conditional,conditional,conditional
-default,,,,,no,-,
-,,,,,,,
-values,,none,none,-,yes,-,CombinatrixException
-values,,missing,missing_dir,good_1,no,good_1,
-values,,exists,available,not_csv,,,
-values,,,,wrong_first_row,,,
-,,,,,,,
-constraint csv_path,,none,*,-,,,
-constraint csv_path,,missing,*,-,,,
-constraint csv_path,,exists,*,good_1,,,
-constraint csv_path,,exists,*,not_csv,,,
-constraint csv_path,,exists,*,wrong_first_row,,,
-constraint params_out_path,,*,none,*,,,
-constraint params_out_path,,*,missing_dir,*,,,
-constraint params_out_path,,*,available,*,,,
-constraint csv_state,,none,*,-,,,
-constraint csv_state,,missing,*,-,,,
-constraint csv_state,,exists,,good_1,,,
-constraint csv_state,,exists,,not_csv,,,
-constraint csv_state,,exists,,wrong_first_row,,,
-,,,,,,,
-conditional params_written,,exists,available,good_1,yes,,
-conditional compare_params,,exists,none,good_1,,good_1,
-conditional compare_params,,exists,available,good_1,,good_1,
-conditional raises,,none,,,,,CombinatrixException
-conditional raises,,missing,,,,,CombinatrixException
-conditional raises,,,missing_dir,,,,CombinatrixException
-conditional raises,,,,wrong_first_row,,,CombinatrixException
-conditional raises,,,,not_csv,,,CombinatrixException
+field,test_id,csv_path,params_out_path,csv_state,params_written,compare_params,raises,notes
+type,index,generated,generated,generated,conditional,conditional,conditional,comment
+default,,,,,no,-,,
+,,,,,,,,
+values,,none,none,-,yes,-,CombinatrixException,
+values,,missing,missing_dir,good_1,no,good_1,,
+values,,exists,available,not_csv,,ors_and_nors,,
+values,,,,wrong_first_row,,,,
+values,,,,ors_and_nors,,,,
+,,,,,,,,
+constraint csv_path,,none,*,-,,,,
+constraint csv_path,,missing,*,-,,,,
+constraint csv_path,,exists,*,!-,,,,"in a bit we can express this as !-, along with serveral rows below"
+constraint csv_state,,!exists,*,-,,,,can express this as !exists
+constraint csv_state,,exists,,not_csv,,,,
+constraint csv_state,,exists,,wrong_first_row,,,,
+constraint csv_state,,exists,,ors_and_nors,,,,
+,,,,,,,,
+conditional params_written,,exists,available,good_1,yes,,,
+conditional params_written,,exists,available,ors_and_nors,yes,,,
+conditional compare_params,,exists,none,good_1,,good_1,,
+conditional compare_params,,exists,available,good_1,,good_1,,
+conditional compare_params,,exists,none,ors_and_nors,,ors_and_nors,,
+conditional compare_params,,exists,available,ors_and_nors,,ors_and_nors,,
+conditional raises,,none,,,,,CombinatrixException,
+conditional raises,,missing,,,,,CombinatrixException,
+conditional raises,,,missing_dir,,,,CombinatrixException,
+conditional raises,,,,wrong_first_row,,,CombinatrixException,
+conditional raises,,,,not_csv,,,CombinatrixException,

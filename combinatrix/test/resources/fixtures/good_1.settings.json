@@ -10,7 +10,9 @@
 			"values" : {
 				"a" : {
 					"constraints" : {
-						"field2" : ["d"]
+						"field2" : {
+							"or" : ["d"]
+						}
 					}
 				},
 				"b" : {}
@@ -23,7 +25,9 @@
 				"c" : {},
 				"d" : {
 					"constraints" : {
-						"field1" : ["a"]
+						"field1" : {
+							"or" : ["a"]
+						}
 					}
 				}
 			}

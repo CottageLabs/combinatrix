@@ -1,0 +1,12 @@
+field,test_id,field1,field2,field3,field4
+type,index,generated,generated,generated,generated
+default,,,,,
+,,,,,
+values,,a,c,e,g
+values,,b,d,f,h
+values,,,,1,2
+,,,,,
+constraint field1,,a,!c,,
+constraint field1,,b,,!e,
+constraint field2,,,c,e|f,
+constraint field3,,,,f,!g|h

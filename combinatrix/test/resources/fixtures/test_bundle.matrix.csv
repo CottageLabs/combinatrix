@@ -1,0 +1,9 @@
+test_id,field1,field2,field3
+1,yes,a,1
+2,yes,a,2
+3,yes,b,1
+4,yes,b,2
+5,no,a,1
+6,no,a,2
+7,no,b,1
+8,no,b,2

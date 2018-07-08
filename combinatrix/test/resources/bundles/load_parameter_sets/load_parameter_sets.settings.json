@@ -1,0 +1,537 @@
+{
+  "parameters": [
+    {
+      "type": "index", 
+      "name": "test_id"
+    }, 
+    {
+      "values": {
+        "none": {
+          "constraints": {
+            "matrix": {
+              "or": [
+                "not_present"
+              ]
+            }, 
+            "settings_json": {
+              "or": [
+                "not_present"
+              ]
+            }, 
+            "settings_csv_age": {
+              "or": [
+                "-"
+              ]
+            }, 
+            "settings_json_age": {
+              "or": [
+                "-"
+              ]
+            }, 
+            "settings_csv": {
+              "or": [
+                "not_present"
+              ]
+            }, 
+            "matrix_age": {
+              "or": [
+                "-"
+              ]
+            }
+          }
+        }, 
+        "not_exists": {
+          "constraints": {
+            "matrix": {
+              "or": [
+                "not_present"
+              ]
+            }, 
+            "settings_json": {
+              "or": [
+                "not_present"
+              ]
+            }, 
+            "settings_csv_age": {
+              "or": [
+                "-"
+              ]
+            }, 
+            "settings_json_age": {
+              "or": [
+                "-"
+              ]
+            }, 
+            "settings_csv": {
+              "or": [
+                "not_present"
+              ]
+            }, 
+            "matrix_age": {
+              "or": [
+                "-"
+              ]
+            }
+          }
+        }, 
+        "exists": {}
+      }, 
+      "type": "generated", 
+      "name": "bundle_path"
+    }, 
+    {
+      "values": {
+        "none": {
+          "constraints": {
+            "matrix": {
+              "or": [
+                "not_present"
+              ]
+            }, 
+            "settings_json": {
+              "or": [
+                "not_present"
+              ]
+            }, 
+            "settings_csv_age": {
+              "or": [
+                "-"
+              ]
+            }, 
+            "settings_json_age": {
+              "or": [
+                "-"
+              ]
+            }, 
+            "settings_csv": {
+              "or": [
+                "not_present"
+              ]
+            }, 
+            "matrix_age": {
+              "or": [
+                "-"
+              ]
+            }
+          }
+        }, 
+        "not_exists": {
+          "constraints": {
+            "matrix": {
+              "or": [
+                "not_present"
+              ]
+            }, 
+            "settings_json": {
+              "or": [
+                "not_present"
+              ]
+            }, 
+            "settings_csv_age": {
+              "or": [
+                "-"
+              ]
+            }, 
+            "settings_json_age": {
+              "or": [
+                "-"
+              ]
+            }, 
+            "settings_csv": {
+              "or": [
+                "not_present"
+              ]
+            }, 
+            "matrix_age": {
+              "or": [
+                "-"
+              ]
+            }
+          }
+        }, 
+        "exists": {
+          "constraints": {
+            "bundle_path": {
+              "or": [
+                "exists"
+              ]
+            }
+          }
+        }
+      }, 
+      "type": "generated", 
+      "name": "bundle_name"
+    }, 
+    {
+      "values": {
+        "none": {}, 
+        "not_exists": {
+          "constraints": {
+            "bundle_path": {
+              "or": [
+                "exists"
+              ]
+            }, 
+            "bundle_name": {
+              "or": [
+                "exists"
+              ]
+            }
+          }
+        }, 
+        "exists": {
+          "constraints": {
+            "bundle_path": {
+              "or": [
+                "exists"
+              ]
+            }, 
+            "bundle_name": {
+              "or": [
+                "exists"
+              ]
+            }
+          }
+        }
+      }, 
+      "type": "generated", 
+      "name": "name_field"
+    }, 
+    {
+      "values": {
+        "none": {}, 
+        "single_filter": {
+          "constraints": {
+            "bundle_path": {
+              "or": [
+                "exists"
+              ]
+            }, 
+            "bundle_name": {
+              "or": [
+                "exists"
+              ]
+            }
+          }
+        }, 
+        "double_filter": {
+          "constraints": {
+            "bundle_path": {
+              "or": [
+                "exists"
+              ]
+            }, 
+            "bundle_name": {
+              "or": [
+                "exists"
+              ]
+            }
+          }
+        }
+      }, 
+      "type": "generated", 
+      "name": "filters"
+    }, 
+    {
+      "values": {
+        "not_present": {
+          "constraints": {
+            "settings_csv_age": {
+              "or": [
+                "-"
+              ]
+            }
+          }
+        }, 
+        "present": {
+          "constraints": {
+            "bundle_path": {
+              "or": [
+                "exists"
+              ]
+            }, 
+            "settings_csv_age": {
+              "nor": [
+                "-"
+              ]
+            }, 
+            "bundle_name": {
+              "or": [
+                "exists"
+              ]
+            }
+          }
+        }
+      }, 
+      "type": "generated", 
+      "name": "settings_csv"
+    }, 
+    {
+      "values": {
+        "not_present": {
+          "constraints": {
+            "settings_json_age": {
+              "or": [
+                "-"
+              ]
+            }
+          }
+        }, 
+        "present": {
+          "constraints": {
+            "bundle_path": {
+              "or": [
+                "exists"
+              ]
+            }, 
+            "settings_json_age": {
+              "nor": [
+                "-"
+              ]
+            }, 
+            "bundle_name": {
+              "or": [
+                "exists"
+              ]
+            }
+          }
+        }
+      }, 
+      "type": "generated", 
+      "name": "settings_json"
+    }, 
+    {
+      "values": {
+        "not_present": {
+          "constraints": {
+            "matrix_age": {
+              "or": [
+                "-"
+              ]
+            }
+          }
+        }, 
+        "present": {
+          "constraints": {
+            "bundle_path": {
+              "or": [
+                "exists"
+              ]
+            }, 
+            "matrix_age": {
+              "nor": [
+                "-"
+              ]
+            }, 
+            "bundle_name": {
+              "or": [
+                "exists"
+              ]
+            }
+          }
+        }
+      }, 
+      "type": "generated", 
+      "name": "matrix"
+    }, 
+    {
+      "values": {
+        "1": {
+          "constraints": {
+            "settings_json_age": {
+              "nor": [
+                "1"
+              ]
+            }, 
+            "matrix_age": {
+              "nor": [
+                "1"
+              ]
+            }
+          }
+        }, 
+        "-1": {
+          "constraints": {
+            "settings_json_age": {
+              "nor": [
+                "-1"
+              ]
+            }, 
+            "matrix_age": {
+              "nor": [
+                "-1"
+              ]
+            }
+          }
+        }, 
+        "-": {}, 
+        "0": {
+          "constraints": {
+            "settings_json_age": {
+              "nor": [
+                "0"
+              ]
+            }, 
+            "matrix_age": {
+              "nor": [
+                "0"
+              ]
+            }
+          }
+        }
+      }, 
+      "type": "generated", 
+      "name": "settings_csv_age"
+    }, 
+    {
+      "values": {
+        "1": {
+          "constraints": {
+            "matrix_age": {
+              "nor": [
+                "1"
+              ]
+            }, 
+            "settings_csv_age": {
+              "nor": [
+                "1"
+              ]
+            }
+          }
+        }, 
+        "-1": {
+          "constraints": {
+            "matrix_age": {
+              "nor": [
+                "-1"
+              ]
+            }, 
+            "settings_csv_age": {
+              "nor": [
+                "-1"
+              ]
+            }
+          }
+        }, 
+        "-": {}, 
+        "0": {
+          "constraints": {
+            "matrix_age": {
+              "nor": [
+                "0"
+              ]
+            }, 
+            "settings_csv_age": {
+              "nor": [
+                "0"
+              ]
+            }
+          }
+        }
+      }, 
+      "type": "generated", 
+      "name": "settings_json_age"
+    }, 
+    {
+      "values": {
+        "1": {
+          "constraints": {
+            "settings_json_age": {
+              "nor": [
+                "1"
+              ]
+            }, 
+            "settings_csv_age": {
+              "nor": [
+                "1"
+              ]
+            }
+          }
+        }, 
+        "-1": {
+          "constraints": {
+            "settings_json_age": {
+              "nor": [
+                "-1"
+              ]
+            }, 
+            "settings_csv_age": {
+              "nor": [
+                "-1"
+              ]
+            }
+          }
+        }, 
+        "-": {}, 
+        "0": {
+          "constraints": {
+            "settings_json_age": {
+              "nor": [
+                "0"
+              ]
+            }, 
+            "settings_csv_age": {
+              "nor": [
+                "0"
+              ]
+            }
+          }
+        }
+      }, 
+      "type": "generated", 
+      "name": "matrix_age"
+    }, 
+    {
+      "default": "", 
+      "values": {
+        "CombinatrixException": {
+          "conditions": [
+            {
+              "settings_json": [
+                "not_present"
+              ], 
+              "settings_csv": [
+                "not_present"
+              ], 
+              "matrix": [
+                "not_present"
+              ]
+            }, 
+            {
+              "bundle_path": [
+                "none"
+              ]
+            }, 
+            {
+              "bundle_path": [
+                "not_exists"
+              ]
+            }, 
+            {
+              "bundle_name": [
+                "none"
+              ]
+            }, 
+            {
+              "bundle_name": [
+                "not_exists"
+              ]
+            }, 
+            {
+              "name_field": [
+                "none"
+              ]
+            }, 
+            {
+              "name_field": [
+                "not_exists"
+              ]
+            }
+          ]
+        }
+      }, 
+      "type": "conditional", 
+      "name": "raises"
+    }
+  ]
+}

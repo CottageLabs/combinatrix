@@ -1,0 +1,41 @@
+field,test_id,bundle_path,bundle_name,name_field,filters,settings_csv,settings_json,matrix,settings_csv_age,settings_json_age,matrix_age,raises
+type,index,generated,generated,generated,generated,generated,generated,generated,generated,generated,generated,conditional
+default,,,,,,,,,,,,
+,,,,,,,,,,,,
+values,,none,none,none,none,not_present,not_present,not_present,-,-,-,CombinatrixException
+values,,not_exists,not_exists,not_exists,single_filter,present,present,present,-1,-1,-1,
+values,,exists,exists,exists,double_filter,,,,0,0,0,
+values,,,,,,,,,1,1,1,
+,,,,,,,,,,,,
+constraint bundle_path,,none,,,,not_present,not_present,not_present,-,-,-,
+constraint bundle_path,,not_exists,,,,not_present,not_present,not_present,-,-,-,
+constraint bundle_name,,,none,,,not_present,not_present,not_present,-,-,-,
+constraint bundle_name,,,not_exists,,,not_present,not_present,not_present,-,-,-,
+constraint bundle_name,,exists,exists,,,,,,,,,
+constraint name_field,,exists,exists,not_exists,,,,,,,,
+constraint name_field,,exists,exists,exists,,,,,,,,
+constraint filters,,exists,exists,,single_filter,,,,,,,
+constraint filters,,exists,exists,,double_filter,,,,,,,
+constraint settings_csv,,exists,exists,,,present,,,!-,,,
+constraint settings_csv,,,,,,not_present,,,-,,,
+constraint settings_json,,exists,exists,,,,present,,,!-,,
+constraint settings_json,,,,,,,not_present,,,-,,
+constraint matrix,,exists,exists,,,,,present,,,!-,
+constraint matrix,,,,,,,,not_present,,,-,
+constraint settings_csv_age,,,,,,,,,-1,!-1,!-1,
+constraint settings_csv_age,,,,,,,,,0,!0,!0,
+constraint settings_csv_age,,,,,,,,,1,!1,!1,
+constraint settings_json_age,,,,,,,,,!-1,-1,!-1,
+constraint settings_json_age,,,,,,,,,!0,0,!0,
+constraint settings_json_age,,,,,,,,,!1,1,!1,
+constraint matrix_age,,,,,,,,,!-1,!-1,-1,
+constraint matrix_age,,,,,,,,,!0,!0,0,
+constraint matrix_age,,,,,,,,,!1,!1,1,
+,,,,,,,,,,,,
+conditional raises,,,,,,not_present,not_present,not_present,,,,CombinatrixException
+conditional raises,,none,,,,,,,,,,CombinatrixException
+conditional raises,,not_exists,,,,,,,,,,CombinatrixException
+conditional raises,,,none,,,,,,,,,CombinatrixException
+conditional raises,,,not_exists,,,,,,,,,CombinatrixException
+conditional raises,,,,none,,,,,,,,CombinatrixException
+conditional raises,,,,not_exists,,,,,,,,CombinatrixException

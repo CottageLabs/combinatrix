@@ -551,6 +551,14 @@ For example, the final row in the following table adds a condition such that `co
 | conditional condition1 | | a |    | yes        |            |
 
 
+### Lists of OR values
+
+TODO
+
+### Lists of NOR values
+
+TODO
+
 ## Test Integration
 
 Combinatrix is designed to allow you to plug combinations directly into parameterised tests, and it does this through the concept of a
@@ -610,3 +618,10 @@ Note also we provide a convenience function `rel2abs` which allows us to convert
 
 The above example loads a bundle called **combine** from the directory **../resources/bundles/combine**.  It tells us that the field
 **test_id** is the field that will uniquely name each test, and it applies a filter
+
+
+## Advanced Topics
+
+### Conflict Detection
+
+TODO

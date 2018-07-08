@@ -24,6 +24,10 @@ class TestCombine(unittest.TestCase):
         super(TestCombine, self).setUp()
 
     def tearDown(self):
+        available = OUT_PATHS["available"]
+        if os.path.exists(available):
+            os.remove(available)
+
         super(TestCombine, self).tearDown()
 
     @parameterized.expand(load_cases)

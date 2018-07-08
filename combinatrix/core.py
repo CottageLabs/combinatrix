@@ -4,6 +4,7 @@ from combinatrix import csvutil
 INDEX = "index"
 GENERATED = "generated"
 CONDITIONAL = "conditional"
+COMMENT = "comment"
 
 FIELD = "field"
 TYPE = "type"
@@ -12,7 +13,9 @@ VALUES = "values"
 CONSTRAINT = "constraint"
 CONDITION = "condition"
 
-ANY = "*"
+ANY = ["*", ""]
+NOT = "!"
+OR = "|"
 
 class CombinatrixException(Exception):
     pass
@@ -39,6 +42,7 @@ def _csv2parameters(csv_path):
         parameters = []
         try:
             first = reader.next()
+            second = reader.next()
         except StopIteration:
             raise CombinatrixException("Empty settings csv")
         except UnicodeDecodeError as e:
@@ -46,15 +50,16 @@ def _csv2parameters(csv_path):
 
         if first[0] != FIELD:
             raise CombinatrixException("First CSV row must be a 'field' row")
+        if second[0] != TYPE:
+            raise CombinatrixException("Second CSV row must be a 'type' row")
+
         for i in range(1, len(first)):
-            obj = {"name" : first[i]}
+            obj = {"name" : first[i], "type" : second[i]}
             parameters.append(obj)
 
         for row in reader:
             if row[0] == "":
                 continue
-            elif row[0] == TYPE:
-                _read_types(row[1:], parameters)
             elif row[0] == DEFAULT:
                 _read_defaults(row[1:], parameters)
             elif row[0] == VALUES:
@@ -69,25 +74,19 @@ def _csv2parameters(csv_path):
     return {"parameters" : parameters}
 
 
-def _read_types(type_list, parameters):
-    for i in range(len(type_list)):
-        t = type_list[i]
-        parameters[i]["type"] = t
-        # if this is not a conditional type, and the default has already
-        # been set, then remove it, it's not needed
-        if t != "conditional" and "default" in parameters[i]:
-            del parameters[i]["default"]
-
-
 def _read_defaults(default_list, parameters):
     for i in range(len(default_list)):
-        d = default_list[i]
-        # set the default if the type is conditional, or no type is currently set
-        if parameters[i].get("type", "conditional") == "conditional":
-            parameters[i]["default"] = d
+        if parameters[i].get("type") not in [CONDITIONAL]:
+            continue
+        parameters[i]["default"] = default_list[i]
+
 
 def _read_values(value_list, parameters):
     for i in range(len(value_list)):
+        param = parameters[i]
+        if param.get("type") in [INDEX, COMMENT]:
+            continue
+
         v = value_list[i]
         if v == "":
             continue
@@ -105,15 +104,34 @@ def _read_constraint(constraint_set, field, parameters):
     # work out the value and the set of constraints for the supplied field which are specified by this row
     constraint_map = {}
     for i in range(len(constraint_set)):
+        if parameters[i].get("type") not in [GENERATED]:
+            continue
+
         constraint = constraint_set[i]
-        if constraint == "" or constraint == ANY:
+        if constraint in ANY:
             continue
 
         if i == key_idx:
             key_value = constraint
         else:
-            constraint_map[headers[i]] = [constraint]
+            constraint = constraint.strip()
+            is_not = False
+            if constraint.startswith(NOT):
+                is_not = True
+                constraint = constraint[1:]
+            bits = constraint.split(OR)
+            bits = [b.strip() for b in bits]
 
+            if is_not:
+                if headers[i] not in constraint_map:
+                    constraint_map[headers[i]] = {}
+                constraint_map[headers[i]]["nor"] = bits
+            else:
+                if headers[i] not in constraint_map:
+                    constraint_map[headers[i]] = {}
+                constraint_map[headers[i]]["or"] = bits
+
+    # if we didn't find any constraints no need to go any further
     if len(constraint_map.keys()) == 0:
         return
 
@@ -137,7 +155,15 @@ def _read_constraint(constraint_set, field, parameters):
         if key not in context:
             context[key] = values
         else:
-            context[key] += values
+            if "or" not in context[key] and "or" in values:
+                context[key]["or"] = values["or"]
+            elif "or" in values:
+                context[key]["or"] += values["or"]
+
+            if "nor" not in context[key] and "nor" in values:
+                context[key]["nor"] = values["nor"]
+            elif "nor" in values:
+                context[key]["nor"] += values["nor"]
 
 
 def _read_condition(condition_set, field, parameters):
@@ -148,8 +174,11 @@ def _read_condition(condition_set, field, parameters):
     # work out the value and the set of constraints for the supplied field which are specified by this row
     condition_map = {}
     for i in range(len(condition_set)):
+        if parameters[i].get("type") not in [GENERATED, CONDITIONAL]:
+            continue
+
         condition = condition_set[i]
-        if condition == "" or condition == ANY:
+        if condition in ANY:
             continue
 
         if i == key_idx:
@@ -287,9 +316,18 @@ def _filter(combo, fields):
         constraints = filter.get("values", {}).get(cval, {}).get("constraints", {})
         if (len(constraints.keys())) == 0:
             continue
-        for cfield, values in constraints.iteritems():
-            if combo[cfield] not in values:
-                return False
+
+        for cfield, ors_and_nors in constraints.iteritems():
+            if "or" in ors_and_nors and "nor" in ors_and_nors:
+                raise CombinatrixException("You cannot define both 'or' and 'nor' in your constraints")
+
+            if "or" in ors_and_nors:
+                if combo[cfield] not in ors_and_nors["or"]:
+                    return False
+            if "nor" in ors_and_nors:
+                if combo[cfield] in ors_and_nors["nor"]:
+                    return False
+
     return True
 
 

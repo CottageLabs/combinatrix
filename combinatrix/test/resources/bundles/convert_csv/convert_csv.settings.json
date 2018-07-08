@@ -8,25 +8,29 @@
       "values": {
         "none": {
           "constraints": {
-            "csv_state": [
-              "-"
-            ]
+            "csv_state": {
+              "or": [
+                "-"
+              ]
+            }
           }
         }, 
         "exists": {
           "constraints": {
-            "csv_state": [
-              "good_1", 
-              "not_csv", 
-              "wrong_first_row"
-            ]
+            "csv_state": {
+              "nor": [
+                "-"
+              ]
+            }
           }
         }, 
         "missing": {
           "constraints": {
-            "csv_state": [
-              "-"
-            ]
+            "csv_state": {
+              "or": [
+                "-"
+              ]
+            }
           }
         }
       }, 
@@ -44,33 +48,41 @@
     }, 
     {
       "values": {
-        "good_1": {
-          "constraints": {
-            "csv_path": [
-              "exists"
-            ]
-          }
-        }, 
+        "good_1": {}, 
         "wrong_first_row": {
           "constraints": {
-            "csv_path": [
-              "exists"
-            ]
+            "csv_path": {
+              "or": [
+                "exists"
+              ]
+            }
+          }
+        }, 
+        "ors_and_nors": {
+          "constraints": {
+            "csv_path": {
+              "or": [
+                "exists"
+              ]
+            }
           }
         }, 
         "-": {
           "constraints": {
-            "csv_path": [
-              "none", 
-              "missing"
-            ]
+            "csv_path": {
+              "nor": [
+                "exists"
+              ]
+            }
           }
         }, 
         "not_csv": {
           "constraints": {
-            "csv_path": [
-              "exists"
-            ]
+            "csv_path": {
+              "or": [
+                "exists"
+              ]
+            }
           }
         }
       }, 
@@ -91,6 +103,17 @@
               ], 
               "csv_state": [
                 "good_1"
+              ]
+            }, 
+            {
+              "params_out_path": [
+                "available"
+              ], 
+              "csv_path": [
+                "exists"
+              ], 
+              "csv_state": [
+                "ors_and_nors"
               ]
             }
           ]
@@ -129,7 +152,33 @@
             }
           ]
         }, 
-        "-": {}
+        "-": {}, 
+        "ors_and_nors": {
+          "conditions": [
+            {
+              "params_out_path": [
+                "none"
+              ], 
+              "csv_path": [
+                "exists"
+              ], 
+              "csv_state": [
+                "ors_and_nors"
+              ]
+            }, 
+            {
+              "params_out_path": [
+                "available"
+              ], 
+              "csv_path": [
+                "exists"
+              ], 
+              "csv_state": [
+                "ors_and_nors"
+              ]
+            }
+          ]
+        }
       }, 
       "type": "conditional", 
       "name": "compare_params"
@@ -169,6 +218,10 @@
       }, 
       "type": "conditional", 
       "name": "raises"
+    }, 
+    {
+      "type": "comment", 
+      "name": "notes"
     }
   ]
 }
