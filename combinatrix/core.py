@@ -26,7 +26,10 @@ def convert_csv(csv_path, params_out_path=None):
         raise CombinatrixException("You must specify a csv_path to convert")
     parameters = _csv2parameters(csv_path)
     if params_out_path is not None:
-        if not os.path.exists(os.path.dirname(params_out_path)):
+        dir = os.path.dirname(params_out_path)
+        if dir == "": # we were just given a filename for the current directory
+            dir = "."
+        if not os.path.exists(dir):
             raise CombinatrixException("The directory for the params_out_path does not exist")
         with codecs.open(params_out_path, "wb", "utf-8") as f:
             f.write(json.dumps(parameters, indent=2))
@@ -225,6 +228,8 @@ def combine(parameters, out_path):
         raise CombinatrixException("parameters and out_path must be set")
 
     out_dir = os.path.dirname(out_path)
+    if out_dir == "":   # we have been given a filename in the current directory
+        out_dir = "."
     if not os.path.exists(out_dir):
         raise CombinatrixException("Directory {x} does not exist for output path".format(x=out_dir))
 
@@ -366,37 +371,4 @@ def load_matrix(source_path):
         return [p for p in csvutil.UnicodeDictReader(f)]
 
 
-if __name__ == "__main__":
-    import argparse
-    parser = argparse.ArgumentParser()
 
-    parser.add_argument("-c", "--csv", help="input csv")
-    parser.add_argument("-j", "--json", help="input json")
-    parser.add_argument("-o", "--out", help="output csv file")
-    parser.add_argument("-p", "--pout", help="output parameters json file")
-    parser.add_argument("-g", "--generate", help="should the combinations be generated")
-
-    args = parser.parse_args()
-
-    if args.csv and args.json:
-        print("Specify either -c/--csv or -j/--json, but not both")
-        exit()
-
-    if not args.csv and not args.json:
-        print("Specify either -c/--csv or -j/--json")
-        exit()
-
-    if not args.out:
-        print("You must specify an output file with -o")
-        exit()
-
-    gen = False
-    if args.generate:
-        gen = True
-
-    if args.csv and not gen:
-        convert_csv(args.csv, args.pout)
-    elif args.csv and gen:
-        fromcsv(args.csv, args.out, args.pout)
-    elif args.json and gen:
-        fromjsonfile(args.json, args.out)

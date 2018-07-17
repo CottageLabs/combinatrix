@@ -4,29 +4,56 @@ Combinatrix is a utility library to produce a full set of variations of a set of
 for the values of those parameters, any inter-constraints/conditions on them.
 
 It can take input in the form of a structured CSV or as a suitable JSON document.  It can also be integrated directly with your Python
-code by providing a `dict` of with the appropriate configuration.
+code by providing a `dict` with the appropriate configuration.
 
 For example, if you are looking to generate an exhaustive set of paramters for parameterised testing, you can feed the sets of parameters
 and their constraints into Combinatrix, and it will output all parameter sets that should be fed to your tests.
 
 
+## Installation
+
+For now, combinatrix is not on pypi, but you can install it in your requirements.txt as follows:
+
+```
+-e git+https://github.com/CottageLabs/combinatrix.git#egg=combinatrix
+```
+
 ## Command Line
 
 To use from the command line
 
-* provide either a `-c` or a `-j` option, for an input CSV or JSON file respectively, containing the path to the source file
-* provide an `-o` option if you want the resulting output to be written to a file, containing the path to the output file
-* provide a `-p` option when using `-c` if you want the JSON obtained by converting the CSV written to file, containing the path to the output file
-* privde a `-g` option when using `-c` if you want the combinations to be generated.  You can therefore omit this if you just want the CSV converted to JSON
+```
+usage: combinatrix [-h] [-c] [-j] [-m MATRIX] [-s SETTINGS] input
 
+positional arguments:
+  input                 Source input file; can be either CSV or JSON, and
+                        should end with either .csv or .json
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -c, --csv             if the input file does not end with .csv but is a CSV,
+                        use this flag to force that format
+  -j, --json            if the input file does not end with .csv but is a CSV,
+                        use this flag to force that format
+  -m MATRIX, --matrix MATRIX
+                        output file path for matrix. If omitted, the matrix
+                        will not be generated
+  -s SETTINGS, --settings SETTINGS
+                        output file path for JSON settings, if this is a
+                        conversion from a CSV settings file
+```
+                     
 for example
 
 ```
-python combinatrix.py -c mycsv.csv -o combos.csv -p myjson.json -g yes
+combinatrix -c -m combos.csv -s myjson.json myinput.settings.csv
 ```
 
-FIXME: when we're not on a plane, look up how to use argparse, to make -g and on/off switch.
+You can try this yourself straight away with some real data from this code repository, like this:
 
+```
+combinatrix -c -m my-first-combination.matrix.csv -j my-first-combination.settings.json docs/examples/example.csv
+```
 
 ## Options and Capabilities
 
