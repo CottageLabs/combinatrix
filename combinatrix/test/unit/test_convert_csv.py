@@ -6,7 +6,8 @@ from combinatrix.test.fixtures.settings_csv import SettingsCSVFactory
 from combinatrix.test.fixtures.settings_json import SettingsJSONFactory
 
 def load_cases():
-    return load_parameter_sets(rel2abs(__file__, "..", "resources", "bundles", "convert_csv"), "convert_csv", "test_id", {"test_id" : []})
+    return load_parameter_sets(rel2abs(__file__, "..", "resources", "bundles", "convert_csv"), "convert_csv", "test_id",
+                               {"test_id" : []})
 
 EXCEPTIONS = {
     "CombinatrixException" : CombinatrixException
@@ -60,6 +61,6 @@ class TestConvertCsv(unittest.TestCase):
 
             if compare_params_arg in ["good_1"]:
                 compare_with_json = SettingsJSONFactory.get_json(compare_params_arg)
-                assert parameters == compare_with_json
+                assert parameters.as_dict() == compare_with_json
 
 

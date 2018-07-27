@@ -6,7 +6,8 @@ from combinatrix.test.fixtures.matrix_csv import MatrixCSVFactory
 from combinatrix.test.fixtures.settings_json import SettingsJSONFactory
 
 def load_cases():
-    return load_parameter_sets(rel2abs(__file__, "..", "resources", "bundles", "combine"), "combine", "test_id", {"test_id" : []})
+    return load_parameter_sets(rel2abs(__file__, "..", "resources", "bundles", "combine"), "combine", "test_id",
+                               {"test_id" : []})
 
 EXCEPTIONS = {
     "CombinatrixException" : CombinatrixException
