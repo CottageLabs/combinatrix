@@ -26,9 +26,11 @@
         "e": {
           "conditions": [
             {
-              "field1": [
-                "a"
-              ]
+              "field1": {
+                "or": [
+                  "a"
+                ]
+              }
             }
           ]
         }, 
@@ -43,9 +45,11 @@
         "h": {
           "conditions": [
             {
-              "field2": [
-                "d"
-              ]
+              "field2": {
+                "or": [
+                  "d"
+                ]
+              }
             }
           ]
         }, 
@@ -53,6 +57,32 @@
       }, 
       "type": "conditional", 
       "name": "condition2"
+    }, 
+    {
+      "default": "i", 
+      "values": {
+        "i": {}, 
+        "j": {
+          "conditions": [
+            {
+              "field1": {
+                "nor": [
+                  "a"
+                ]
+              }
+            }, 
+            {
+              "field2": {
+                "nor": [
+                  "d"
+                ]
+              }
+            }
+          ]
+        }
+      }, 
+      "type": "conditional", 
+      "name": "condition3"
     }
   ]
 }

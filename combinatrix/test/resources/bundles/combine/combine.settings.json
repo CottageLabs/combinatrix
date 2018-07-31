@@ -32,27 +32,33 @@
         "just_combine": {
           "conditions": [
             {
-              "parameters": [
-                "just_combine"
-              ]
+              "parameters": {
+                "or": [
+                  "just_combine"
+                ]
+              }
             }
           ]
         }, 
         "with_constraints": {
           "conditions": [
             {
-              "parameters": [
-                "with_constraints"
-              ]
+              "parameters": {
+                "or": [
+                  "with_constraints"
+                ]
+              }
             }
           ]
         }, 
         "good_1": {
           "conditions": [
             {
-              "parameters": [
-                "good_1"
-              ]
+              "parameters": {
+                "or": [
+                  "good_1"
+                ]
+              }
             }
           ]
         }, 
@@ -60,9 +66,11 @@
         "with_conditionals": {
           "conditions": [
             {
-              "parameters": [
-                "with_conditionals"
-              ]
+              "parameters": {
+                "or": [
+                  "with_conditionals"
+                ]
+              }
             }
           ]
         }
@@ -76,29 +84,39 @@
         "CombinatrixException": {
           "conditions": [
             {
-              "parameters": [
-                "none"
-              ]
+              "parameters": {
+                "or": [
+                  "none"
+                ]
+              }
             }, 
             {
-              "parameters": [
-                "malformed"
-              ]
+              "parameters": {
+                "or": [
+                  "malformed"
+                ]
+              }
             }, 
             {
-              "out_path": [
-                "none"
-              ]
+              "out_path": {
+                "or": [
+                  "none"
+                ]
+              }
             }, 
             {
-              "out_path": [
-                "missing_dir"
-              ]
+              "out_path": {
+                "or": [
+                  "missing_dir"
+                ]
+              }
             }, 
             {
-              "parameters": [
-                "with_conflict"
-              ]
+              "parameters": {
+                "or": [
+                  "with_conflict"
+                ]
+              }
             }
           ]
         }

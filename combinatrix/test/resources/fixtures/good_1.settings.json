@@ -39,12 +39,12 @@
 			"values" : {
 				"e" :{
 					"conditions" : [
-						{ "field1" : ["a"] }
+						{ "field1" : { "or" : ["a"] } }
 					]
 				},
 				"f" : {
 					"conditions" : [
-						{ "field2" : ["c"] }
+						{ "field2" : { "or" : ["c"] } }
 					]
 				}
 			}
@@ -56,12 +56,12 @@
 			"values" : {
 				"g" :{
 					"conditions" : [
-						{ "field1" : ["b"] }
+						{ "field1" : { "or" : ["b"] } }
 					]
 				},
 				"h" : {
 					"conditions" : [
-						{ "field2" : ["d"] }
+						{ "field2" : { "or" : ["d"] } }
 					]
 				}
 			}

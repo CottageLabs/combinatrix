@@ -95,26 +95,38 @@
         "yes": {
           "conditions": [
             {
-              "params_out_path": [
-                "available"
-              ], 
-              "csv_path": [
-                "exists"
-              ], 
-              "csv_state": [
-                "good_1"
-              ]
+              "params_out_path": {
+                "or": [
+                  "available"
+                ]
+              }, 
+              "csv_path": {
+                "or": [
+                  "exists"
+                ]
+              }, 
+              "csv_state": {
+                "or": [
+                  "good_1"
+                ]
+              }
             }, 
             {
-              "params_out_path": [
-                "available"
-              ], 
-              "csv_path": [
-                "exists"
-              ], 
-              "csv_state": [
-                "ors_and_nors"
-              ]
+              "params_out_path": {
+                "or": [
+                  "available"
+                ]
+              }, 
+              "csv_path": {
+                "or": [
+                  "exists"
+                ]
+              }, 
+              "csv_state": {
+                "or": [
+                  "ors_and_nors"
+                ]
+              }
             }
           ]
         }, 
@@ -129,26 +141,38 @@
         "good_1": {
           "conditions": [
             {
-              "params_out_path": [
-                "none"
-              ], 
-              "csv_path": [
-                "exists"
-              ], 
-              "csv_state": [
-                "good_1"
-              ]
+              "params_out_path": {
+                "or": [
+                  "none"
+                ]
+              }, 
+              "csv_path": {
+                "or": [
+                  "exists"
+                ]
+              }, 
+              "csv_state": {
+                "or": [
+                  "good_1"
+                ]
+              }
             }, 
             {
-              "params_out_path": [
-                "available"
-              ], 
-              "csv_path": [
-                "exists"
-              ], 
-              "csv_state": [
-                "good_1"
-              ]
+              "params_out_path": {
+                "or": [
+                  "available"
+                ]
+              }, 
+              "csv_path": {
+                "or": [
+                  "exists"
+                ]
+              }, 
+              "csv_state": {
+                "or": [
+                  "good_1"
+                ]
+              }
             }
           ]
         }, 
@@ -156,26 +180,38 @@
         "ors_and_nors": {
           "conditions": [
             {
-              "params_out_path": [
-                "none"
-              ], 
-              "csv_path": [
-                "exists"
-              ], 
-              "csv_state": [
-                "ors_and_nors"
-              ]
+              "params_out_path": {
+                "or": [
+                  "none"
+                ]
+              }, 
+              "csv_path": {
+                "or": [
+                  "exists"
+                ]
+              }, 
+              "csv_state": {
+                "or": [
+                  "ors_and_nors"
+                ]
+              }
             }, 
             {
-              "params_out_path": [
-                "available"
-              ], 
-              "csv_path": [
-                "exists"
-              ], 
-              "csv_state": [
-                "ors_and_nors"
-              ]
+              "params_out_path": {
+                "or": [
+                  "available"
+                ]
+              }, 
+              "csv_path": {
+                "or": [
+                  "exists"
+                ]
+              }, 
+              "csv_state": {
+                "or": [
+                  "ors_and_nors"
+                ]
+              }
             }
           ]
         }
@@ -189,29 +225,39 @@
         "CombinatrixException": {
           "conditions": [
             {
-              "csv_path": [
-                "none"
-              ]
+              "csv_path": {
+                "or": [
+                  "none"
+                ]
+              }
             }, 
             {
-              "csv_path": [
-                "missing"
-              ]
+              "csv_path": {
+                "or": [
+                  "missing"
+                ]
+              }
             }, 
             {
-              "params_out_path": [
-                "missing_dir"
-              ]
+              "params_out_path": {
+                "or": [
+                  "missing_dir"
+                ]
+              }
             }, 
             {
-              "csv_state": [
-                "wrong_first_row"
-              ]
+              "csv_state": {
+                "or": [
+                  "wrong_first_row"
+                ]
+              }
             }, 
             {
-              "csv_state": [
-                "not_csv"
-              ]
+              "csv_state": {
+                "or": [
+                  "not_csv"
+                ]
+              }
             }
           ]
         }

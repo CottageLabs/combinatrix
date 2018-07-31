@@ -1,9 +1,11 @@
-field,test_id,field1,field2,condition1,condition2
-type,index,generated,generated,conditional,conditional
-default,,,,f,g
-,,,,,
-values,,a,c,e,g
-values,,b,d,f,h
-,,,,,
-conditional condition1,,a,,e,
-conditional condition2,,,d,,h
+field,test_id,field1,field2,condition1,condition2,condition3
+type,index,generated,generated,conditional,conditional,conditional
+default,,,,f,g,i
+,,,,,,
+values,,a,c,e,g,i
+values,,b,d,f,h,j
+,,,,,,
+conditional condition1,,a,,e,,
+conditional condition2,,,d,,h,
+conditional condition3,,!a,,,,j
+conditional condition3,,,!d,,,j

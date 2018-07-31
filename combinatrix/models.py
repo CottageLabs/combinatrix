@@ -1,4 +1,5 @@
 from combinatrix import constants
+from combinatrix.exceptions import CombinatrixException
 
 class Parameters(object):
 
@@ -36,7 +37,10 @@ class Parameters(object):
         if value not in self._value_index[real_name]:
             self._value_index[real_name].append(value)
 
-    def add_constraints(self, name, value, constraints):
+    def add_constraint(self, name, value, other_field, or_values=None, nor_values=None):
+        if or_values is not None and nor_values is not None:
+            raise CombinatrixException("you can't specify both or and nor values - choose one")
+
         obj = self.get(name)
         if obj.get("type") not in [constants.GENERATED]:
             return
@@ -45,21 +49,19 @@ class Parameters(object):
             obj["values"][value]["constraints"] = {}
         context = obj["values"][value]["constraints"]
 
-        for key, values in constraints.iteritems():
-            if key not in context:
-                context[key] = values
-            else:
-                if "or" not in context[key] and "or" in values:
-                    context[key]["or"] = values["or"]
-                elif "or" in values:
-                    context[key]["or"] += values["or"]
+        if other_field not in context:
+            context[other_field] = {}
 
-                if "nor" not in context[key] and "nor" in values:
-                    context[key]["nor"] = values["nor"]
-                elif "nor" in values:
-                    context[key]["nor"] += values["nor"]
+        if or_values is not None:
+            if "or" not in context[other_field]:
+                context[other_field]["or"] = []
+            context[other_field]["or"] += or_values
+        elif nor_values is not None:
+            if "nor" not in context[other_field]:
+                context[other_field]["nor"] = []
+            context[other_field]["nor"] += nor_values
 
-    def add_conditions(self, name, value, conditions):
+    def add_condition_set(self, name, value, conditions):
         obj = self.get(name)
         if obj.get("type") not in [constants.CONDITIONAL]:
             return

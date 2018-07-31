@@ -487,45 +487,63 @@
         "CombinatrixException": {
           "conditions": [
             {
-              "settings_json": [
-                "not_present"
-              ], 
-              "settings_csv": [
-                "not_present"
-              ], 
-              "matrix": [
-                "not_present"
-              ]
+              "settings_json": {
+                "or": [
+                  "not_present"
+                ]
+              }, 
+              "settings_csv": {
+                "or": [
+                  "not_present"
+                ]
+              }, 
+              "matrix": {
+                "or": [
+                  "not_present"
+                ]
+              }
             }, 
             {
-              "bundle_path": [
-                "none"
-              ]
+              "bundle_path": {
+                "or": [
+                  "none"
+                ]
+              }
             }, 
             {
-              "bundle_path": [
-                "not_exists"
-              ]
+              "bundle_path": {
+                "or": [
+                  "not_exists"
+                ]
+              }
             }, 
             {
-              "bundle_name": [
-                "none"
-              ]
+              "bundle_name": {
+                "or": [
+                  "none"
+                ]
+              }
             }, 
             {
-              "bundle_name": [
-                "not_exists"
-              ]
+              "bundle_name": {
+                "or": [
+                  "not_exists"
+                ]
+              }
             }, 
             {
-              "name_field": [
-                "none"
-              ]
+              "name_field": {
+                "or": [
+                  "none"
+                ]
+              }
             }, 
             {
-              "name_field": [
-                "not_exists"
-              ]
+              "name_field": {
+                "or": [
+                  "not_exists"
+                ]
+              }
             }
           ]
         }

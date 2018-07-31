@@ -1,5 +1,5 @@
-test_id,field1,field2,condition1,condition2
-1,a,c,e,g
-2,a,d,e,h
-3,b,c,f,g
-4,b,d,f,h
+test_id,field1,field2,condition1,condition2,condition3
+1,a,c,e,g,j
+2,a,d,e,h,i
+3,b,c,f,g,j
+4,b,d,f,h,j

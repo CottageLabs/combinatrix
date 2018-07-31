@@ -1,9 +1,6 @@
 import codecs, json, os
 from combinatrix import csvutil, models, constants
-
-
-class CombinatrixException(Exception):
-    pass
+from combinatrix.exceptions import CombinatrixException, ValidationException
 
 
 def convert_csv(csv_path, params_out_path=None):
@@ -110,7 +107,8 @@ def _read_constraint(constraint_set, field, parameters):
     if len(constraint_map.keys()) == 0:
         return
 
-    parameters.add_constraints(field, key_value, constraint_map)
+    for other_field, rules in constraint_map.iteritems():
+        parameters.add_constraint(field, key_value, other_field, or_values=rules.get("or"), nor_values=rules.get("nor"))
 
 
 def _read_condition(condition_set, field, parameters):
@@ -131,12 +129,27 @@ def _read_condition(condition_set, field, parameters):
         if i == key_idx:
             key_value = condition
         else:
-            condition_map[headers[i]] = [condition]
+            condition = condition.strip()
+            is_not = False
+            if condition.startswith(constants.NOT):
+                is_not = True
+                condition = condition[1:]
+            bits = condition.split(constants.OR)
+            bits = [b.strip() for b in bits]
+
+            if is_not:
+                if headers[i] not in condition_map:
+                    condition_map[headers[i]] = {}
+                condition_map[headers[i]]["nor"] = bits
+            else:
+                if headers[i] not in condition_map:
+                    condition_map[headers[i]] = {}
+                condition_map[headers[i]]["or"] = bits
 
     if len(condition_map.keys()) == 0:
         return
 
-    parameters.add_conditions(field, key_value, condition_map)
+    parameters.add_condition_set(field, key_value, condition_map)
 
 
 def fromcsv(csv_path, combos_out_path, params_out_path=None):
@@ -243,6 +256,12 @@ def _add_conditionals(combo, fields, parameters):
             if conditions is None:
                 continue
             for match_group in conditions:
+                if _conditions_match(combo, match_group):
+                    possible_values.append(val)
+                    break
+
+            """
+            for match_group in conditions:
                 trips = 0
                 for other_field, other_values in match_group.iteritems():
                     if combo[other_field] in other_values:
@@ -250,6 +269,7 @@ def _add_conditionals(combo, fields, parameters):
                 if trips == len(match_group.keys()):
                     possible_values.append(val)
                     break
+            """
 
         possible_values = list(set(possible_values))
         if len(possible_values) == 0:
@@ -261,6 +281,20 @@ def _add_conditionals(combo, fields, parameters):
                                                 x=name, y=combo, z=possible_values)
                                             )
     return
+
+
+def _conditions_match(combo, match_group):
+    trips = 0
+    for other_field, match_conditions in match_group.iteritems():
+        if "or" in match_conditions:
+            if combo[other_field] in match_conditions.get("or", []):
+                trips += 1
+        elif "nor" in match_conditions:
+            if combo[other_field] not in match_conditions.get("nor", []):
+                trips += 1
+        else:
+            raise ValidationException("Expected 'or' or 'nor' in match group")
+    return trips == len(match_group.keys())
 
 
 def _add_index(combo, current_index, indices, paramters):
