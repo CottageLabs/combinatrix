@@ -1,4 +1,4 @@
-import codecs, csv, io
+import codecs, csv, cStringIO
 
 class UTF8Recoder:
     """
@@ -10,8 +10,8 @@ class UTF8Recoder:
     def __iter__(self):
         return self
 
-    def __next__(self):
-        val = next(self.reader)
+    def next(self):
+        val = self.reader.next()
         raw = val.encode("utf-8")
         if raw.startswith(codecs.BOM_UTF8):
             raw = raw.replace(codecs.BOM_UTF8, '', 1)
@@ -27,9 +27,9 @@ class UnicodeReader:
         f = UTF8Recoder(f, encoding)
         self.reader = csv.reader(f, dialect=dialect, **kwds)
 
-    def __next__(self):
-        row = next(self.reader)
-        return [str(s, "utf-8") for s in row]
+    def next(self):
+        row = self.reader.next()
+        return [unicode(s, "utf-8") for s in row]
 
     def __iter__(self):
         return self
@@ -42,7 +42,7 @@ class UnicodeWriter:
 
     def __init__(self, f, dialect=csv.excel, encoding="utf-8", **kwds):
         # Redirect output to a queue
-        self.queue = io.StringIO()
+        self.queue = cStringIO.StringIO()
         self.writer = csv.writer(self.queue, dialect=dialect, **kwds)
         self.stream = f
         self.encoder = codecs.getincrementalencoder(encoding)()
@@ -52,7 +52,7 @@ class UnicodeWriter:
         for s in row:
             if s is None:
                 s = ''
-            if not isinstance(s, str):
+            if not isinstance(s, basestring):
                 s = str(s)
             encoded_row.append(s.encode("utf-8"))
         self.writer.writerow(encoded_row)
@@ -72,10 +72,10 @@ class UnicodeWriter:
 class UnicodeDictReader:
     def __init__(self, f, dialect=csv.excel, encoding="utf-8", **kwds):
         self.reader = UnicodeReader(f, dialect=dialect, encoding=encoding, **kwds)
-        self.headers = next(self.reader)
+        self.headers = self.reader.next()
 
-    def __next__(self):
-        row = next(self.reader)
+    def next(self):
+        row = self.reader.next()
         d = {}
         for i in range(len(self.headers)):
             h = self.headers[i]

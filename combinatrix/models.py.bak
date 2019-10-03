@@ -103,7 +103,7 @@ class Parameters(object):
     def _make_index(self):
         for i, obj in enumerate(self.data):
             self._index[obj.get("name")] = i
-            self._value_index[obj.get("name")] = list(obj.get("values", {}).keys())
+            self._value_index[obj.get("name")] = obj.get("values", {}).keys()
 
 
 class ComboIterator(object):
@@ -119,12 +119,12 @@ class ComboIterator(object):
             for i, value in enumerate(values):
                 constraints = parameters.get_constraints(gf, value)
                 skip = {}
-                for field, rules in constraints.items():
+                for field, rules in constraints.iteritems():
                     if "nor" in rules:
                         skip[field] = self._values_to_indices(parameters, field, rules["nor"])
                     elif "or" in rules:
                         skip[field] = self._mirror_to_indices(parameters, field, rules["or"])
-                if len(list(skip.keys())) > 0:
+                if len(skip.keys()) > 0:
                     s[i] = skip
 
             self.counters[gf] = {"c" : 0, "m": len(values) - 1, "s": s}
@@ -153,7 +153,7 @@ class ComboIterator(object):
     def get_skip(self, name):
         return self.counters[name]["s"]
 
-    def __next__(self):
+    def next(self):
         if self._init:
             self._init = False
             if self._check_position():
@@ -185,7 +185,7 @@ class ComboIterator(object):
             skips = self.get_skip(field)
             if current not in skips:
                 continue
-            for other_field, skip_list in skips[current].items():
+            for other_field, skip_list in skips[current].iteritems():
                 if self.get_current(other_field) in skip_list:
                     return False
         return True

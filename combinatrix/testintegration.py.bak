@@ -71,12 +71,12 @@ def load_parameter_sets(bundle_path, bundle_name, name_field, filters=None, newe
     filtered = []
     for p in parameters:
         counter = 0
-        for field, allowed_values in filters.items():
+        for field, allowed_values in filters.iteritems():
             if len(allowed_values) == 0:
                 counter += 1
             elif p[field] in allowed_values:
                 counter += 1
-        if counter == len(list(filters.keys())):
+        if counter == len(filters.keys()):
             filtered.append((p[name_field], p))
 
     return filtered

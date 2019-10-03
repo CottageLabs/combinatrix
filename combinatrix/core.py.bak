@@ -26,8 +26,8 @@ def _csv2parameters(csv_path):
 
         parameters = models.Parameters()
         try:
-            first = next(reader)
-            second = next(reader)
+            first = reader.next()
+            second = reader.next()
         except StopIteration:
             raise CombinatrixException("Empty settings csv")
         except UnicodeDecodeError as e:
@@ -104,10 +104,10 @@ def _read_constraint(constraint_set, field, parameters):
                 constraint_map[headers[i]]["or"] = bits
 
     # if we didn't find any constraints no need to go any further
-    if len(list(constraint_map.keys())) == 0:
+    if len(constraint_map.keys()) == 0:
         return
 
-    for other_field, rules in constraint_map.items():
+    for other_field, rules in constraint_map.iteritems():
         parameters.add_constraint(field, key_value, other_field, or_values=rules.get("or"), nor_values=rules.get("nor"))
 
 
@@ -146,7 +146,7 @@ def _read_condition(condition_set, field, parameters):
                     condition_map[headers[i]] = {}
                 condition_map[headers[i]]["or"] = bits
 
-    if len(list(condition_map.keys())) == 0:
+    if len(condition_map.keys()) == 0:
         return
 
     parameters.add_condition_set(field, key_value, condition_map)
@@ -192,7 +192,7 @@ def combine(parameters, out_path):
 
     # iterate through all allowable combinations, and construct the final combo set
     combinations = []
-    while next(counter):
+    while counter.next():
         combo = _generate_current(generated_fields, parameters, counter)
         _add_conditionals(combo, conditional_fields, parameters)
         current_index = _add_index(combo, current_index, index_fields, parameters)
@@ -204,7 +204,7 @@ def combine(parameters, out_path):
             writer = csvutil.UnicodeWriter(f)
             writer.writerow(header)
             for combo in combinations:
-                row = [str(combo.get(name, "")) for name in header]
+                row = [unicode(combo.get(name, "")) for name in header]
                 writer.writerow(row)
 
     return combinations
@@ -230,10 +230,10 @@ def _filter(combo, fields, parameters):
     for name in fields:
         cval = combo[name]
         constraints = parameters.get_constraints(name, cval)
-        if (len(list(constraints.keys()))) == 0:
+        if (len(constraints.keys())) == 0:
             continue
 
-        for cfield, ors_and_nors in constraints.items():
+        for cfield, ors_and_nors in constraints.iteritems():
             if "or" in ors_and_nors and "nor" in ors_and_nors:
                 raise CombinatrixException("You cannot define both 'or' and 'nor' in your constraints")
 
@@ -285,7 +285,7 @@ def _add_conditionals(combo, fields, parameters):
 
 def _conditions_match(combo, match_group):
     trips = 0
-    for other_field, match_conditions in match_group.items():
+    for other_field, match_conditions in match_group.iteritems():
         if "or" in match_conditions:
             if combo[other_field] in match_conditions.get("or", []):
                 trips += 1
@@ -294,12 +294,12 @@ def _conditions_match(combo, match_group):
                 trips += 1
         else:
             raise ValidationException("Expected 'or' or 'nor' in match group")
-    return trips == len(list(match_group.keys()))
+    return trips == len(match_group.keys())
 
 
 def _add_index(combo, current_index, indices, paramters):
     for name in indices:
-        combo[name] = str(current_index)
+        combo[name] = unicode(current_index)
     return current_index + 1
 
 

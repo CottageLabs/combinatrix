@@ -71,7 +71,7 @@ class TestLoadParameterSets(unittest.TestCase):
             modified_order[int(settings_json_age_arg)] = "settings_json"
         if matrix_age_arg not in ["-"]:
             modified_order[int(matrix_age_arg)] = "matrix"
-        order_spec = list(modified_order.keys())
+        order_spec = modified_order.keys()
         order_spec.sort()
         order = []
         for o in order_spec:
