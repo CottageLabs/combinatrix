@@ -1,39 +1,42 @@
 import unittest, os
 from parameterized import parameterized
 from combinatrix.testintegration import load_parameter_sets, rel2abs
-from combinatrix.core import CombinatrixException, load_matrix
+from combinatrix.core import CombinatrixException
 from combinatrix.test.fixtures.settings_bundle import SettingsBundleFactory
 
 EXCEPTIONS = {
-    "CombinatrixException" : CombinatrixException
+    "CombinatrixException": CombinatrixException
 }
 
 BUNDLE_PATHS = {
-    "none" : None,
-    "not_exists" : rel2abs(__file__, "path", "does", "not", "exist"),
-    "exists" : rel2abs(__file__, "..", "resources", "fixtures", "test_bundle")
+    "none": None,
+    "not_exists": rel2abs(__file__, "path", "does", "not", "exist"),
+    "exists": rel2abs(__file__, "..", "resources", "fixtures", "test_bundle")
 }
 
 BUNDLE_NAMES = {
-    "none" : None,
-    "not_exists" : "not_exists",
-    "exists" : "test_bundle"
+    "none": None,
+    "not_exists": "not_exists",
+    "exists": "test_bundle"
 }
 
 NAME_FIELDS = {
-    "none" : None,
-    "not_exists" : "not_exists",
-    "exists" : "test_id"
+    "none": None,
+    "not_exists": "not_exists",
+    "exists": "test_id"
 }
 
 FILTERS = {
-    "none" : None,
-    "single_filter" : {"test_id" : ["1"]},
-    "double_filter" : {"test_id" : ["1", "2", "3"], "field3" : ["1"]}
+    "none": None,
+    "single_filter": {"test_id": ["1"]},
+    "double_filter": {"test_id": ["1", "2", "3"], "field3": ["1"]}
 }
 
+
 def load_cases():
-    return load_parameter_sets(rel2abs(__file__, "..", "resources", "bundles", "load_parameter_sets"), "load_parameter_sets", "test_id", {"test_id" : []})
+    return load_parameter_sets(rel2abs(__file__, "..", "resources", "bundles", "load_parameter_sets"),
+                               "load_parameter_sets", "test_id", {"test_id": []})
+
 
 class TestLoadParameterSets(unittest.TestCase):
 
@@ -132,6 +135,3 @@ class TestLoadParameterSets(unittest.TestCase):
                 assert len(combinations) == 1
             elif filters_arg == "double_filter":
                 assert len(combinations) == 2
-
-
-

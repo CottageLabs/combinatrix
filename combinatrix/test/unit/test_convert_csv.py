@@ -5,17 +5,19 @@ from combinatrix.core import CombinatrixException, convert_csv
 from combinatrix.test.fixtures.settings_csv import SettingsCSVFactory
 from combinatrix.test.fixtures.settings_json import SettingsJSONFactory
 
+
 def load_cases():
     return load_parameter_sets(rel2abs(__file__, "..", "resources", "bundles", "convert_csv"), "convert_csv", "test_id",
-                               {"test_id" : []})
+                               {"test_id": []})
+
 
 EXCEPTIONS = {
-    "CombinatrixException" : CombinatrixException
+    "CombinatrixException": CombinatrixException
 }
 
 CSV_PATHS = {
-    "none" : None,
-    "missing" : rel2abs(__file__, "path", "does", "not", "exist.csv")
+    "none": None,
+    "missing": rel2abs(__file__, "path", "does", "not", "exist.csv")
 }
 
 PARAMS_OUT_PATHS = {
@@ -23,6 +25,7 @@ PARAMS_OUT_PATHS = {
     "missing_dir" : rel2abs(__file__, "path", "does", "not", "exist"),
     "available" : rel2abs(__file__, "..", "resources", "tmp", "test_convert_csv.json")
 }
+
 
 class TestConvertCsv(unittest.TestCase):
 
@@ -62,5 +65,3 @@ class TestConvertCsv(unittest.TestCase):
             if compare_params_arg in ["good_1"]:
                 compare_with_json = SettingsJSONFactory.get_json(compare_params_arg)
                 assert parameters.as_dict() == compare_with_json
-
-

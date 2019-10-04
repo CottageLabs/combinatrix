@@ -1,8 +1,9 @@
 import codecs, csv, io
 
+
 class UTF8Recoder:
     """
-    Iterator that reads an encoded stream and reencodes the input to UTF-8
+    Iterator that reads an encoded stream and re-encodes the input to UTF-8
     """
     def __init__(self, f, encoding):
         self.reader = f
@@ -16,6 +17,7 @@ class UTF8Recoder:
         if raw.startswith(codecs.BOM_UTF8):
             raw = raw.replace(codecs.BOM_UTF8, '', 1)
         return raw
+
 
 class UnicodeReader:
     """
@@ -33,6 +35,7 @@ class UnicodeReader:
 
     def __iter__(self):
         return self
+
 
 class UnicodeWriter:
     """

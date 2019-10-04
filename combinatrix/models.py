@@ -1,6 +1,7 @@
 from combinatrix import constants
 from combinatrix.exceptions import CombinatrixException
 
+
 class Parameters(object):
 
     def __init__(self, raw=None):

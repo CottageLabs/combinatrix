@@ -1,6 +1,7 @@
 import os
 from combinatrix.testintegration import rel2abs
 
+
 class SettingsCSVFactory(object):
 
     @classmethod

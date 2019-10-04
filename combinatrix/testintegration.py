@@ -1,6 +1,7 @@
 import os
 from combinatrix.core import fromcsv, fromjsonfile, load_matrix, CombinatrixException
 
+
 def load_parameter_sets(bundle_path, bundle_name, name_field, filters=None, newer_than_tolerance=5.0):
     if bundle_path is None:
         raise CombinatrixException("You must supply a bundle_path")
@@ -80,6 +81,7 @@ def load_parameter_sets(bundle_path, bundle_name, name_field, filters=None, newe
             filtered.append((p[name_field], p))
 
     return filtered
+
 
 def rel2abs(file, *args):
     file = os.path.realpath(file)

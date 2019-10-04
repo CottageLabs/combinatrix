@@ -1,6 +1,7 @@
 import os, json, codecs
 from combinatrix.testintegration import rel2abs
 
+
 class SettingsJSONFactory(object):
 
     @classmethod

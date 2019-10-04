@@ -1,6 +1,7 @@
-import os, json, codecs
+import os
 from combinatrix.testintegration import rel2abs
 from combinatrix.core import load_matrix
+
 
 class MatrixCSVFactory(object):
 

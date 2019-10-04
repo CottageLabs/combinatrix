@@ -1,6 +1,7 @@
 import argparse
 from combinatrix.core import convert_csv, fromcsv, fromjsonfile
 
+
 def main():
     parser = argparse.ArgumentParser(prog="combinatrix",
                                      description="Conbinatrix: Produce a full set of variations of a set of parameters, according to a provided set of rules \

@@ -5,19 +5,22 @@ from combinatrix.core import CombinatrixException, combine, load_matrix
 from combinatrix.test.fixtures.matrix_csv import MatrixCSVFactory
 from combinatrix.test.fixtures.settings_json import SettingsJSONFactory
 
+
 def load_cases():
     return load_parameter_sets(rel2abs(__file__, "..", "resources", "bundles", "combine"), "combine", "test_id",
-                               {"test_id" : []})
+                               {"test_id": []})
+
 
 EXCEPTIONS = {
-    "CombinatrixException" : CombinatrixException
+    "CombinatrixException": CombinatrixException
 }
 
 OUT_PATHS = {
-    "none" : None,
-    "missing_dir" : rel2abs(__file__, "path", "does", "not", "exist"),
-    "available" : rel2abs(__file__, "..", "resources", "tmp", "combine.matrix.csv")
+    "none": None,
+    "missing_dir": rel2abs(__file__, "path", "does", "not", "exist"),
+    "available": rel2abs(__file__, "..", "resources", "tmp", "combine.matrix.csv")
 }
+
 
 class TestCombine(unittest.TestCase):
 
@@ -57,5 +60,3 @@ class TestCombine(unittest.TestCase):
 
             assert combinations == matrix
             assert combinations == from_file
-
-

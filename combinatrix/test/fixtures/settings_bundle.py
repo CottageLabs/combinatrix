@@ -1,6 +1,7 @@
 import os, shutil
 from combinatrix.testintegration import rel2abs
 
+
 class SettingsBundleFactory(object):
 
     @classmethod
@@ -9,20 +10,20 @@ class SettingsBundleFactory(object):
         bundle = rel2abs(__file__, "..", "resources", "fixtures", "test_bundle")
 
         bundle_info = {
-            "settings_csv" : {
-                "path" : None,
-                "mtime" : -1,
-                "status" : settings_csv
+            "settings_csv": {
+                "path": None,
+                "mtime": -1,
+                "status": settings_csv
             },
-            "settings_json" : {
-                "path" : None,
-                "mtime" : -1,
-                "status" : settings_json
+            "settings_json": {
+                "path": None,
+                "mtime": -1,
+                "status": settings_json
             },
-            "matrix" : {
-                "path" : None,
-                "mtime" : -1,
-                "status" : matrix
+            "matrix": {
+                "path": None,
+                "mtime": -1,
+                "status": matrix
             }
         }
 
@@ -71,4 +72,3 @@ class SettingsBundleFactory(object):
             os.remove(settings_json)
         if os.path.exists(matrix):
             os.remove(matrix)
-
