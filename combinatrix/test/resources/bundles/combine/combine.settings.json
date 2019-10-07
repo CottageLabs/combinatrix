@@ -1,34 +1,37 @@
 {
   "parameters": [
     {
-      "type": "index", 
-      "name": "test_id"
-    }, 
+      "name": "test_id",
+      "type": "index"
+    },
     {
+      "name": "parameters",
+      "type": "generated",
       "values": {
-        "none": {}, 
-        "with_conflict": {}, 
-        "with_constraints": {}, 
-        "with_conditionals": {}, 
-        "malformed": {}, 
-        "good_1": {}, 
-        "just_combine": {}
-      }, 
-      "type": "generated", 
-      "name": "parameters"
-    }, 
+        "none": {},
+        "malformed": {},
+        "just_combine": {},
+        "with_constraints": {},
+        "with_conditionals": {},
+        "with_conflict": {},
+        "good_1": {}
+      }
+    },
     {
+      "name": "out_path",
+      "type": "generated",
       "values": {
-        "available": {}, 
-        "none": {}, 
-        "missing_dir": {}
-      }, 
-      "type": "generated", 
-      "name": "out_path"
-    }, 
+        "none": {},
+        "missing_dir": {},
+        "available": {}
+      }
+    },
     {
-      "default": "-", 
+      "name": "check_matrix",
+      "type": "conditional",
+      "default": "-",
       "values": {
+        "-": {},
         "just_combine": {
           "conditions": [
             {
@@ -39,7 +42,7 @@
               }
             }
           ]
-        }, 
+        },
         "with_constraints": {
           "conditions": [
             {
@@ -50,19 +53,7 @@
               }
             }
           ]
-        }, 
-        "good_1": {
-          "conditions": [
-            {
-              "parameters": {
-                "or": [
-                  "good_1"
-                ]
-              }
-            }
-          ]
-        }, 
-        "-": {}, 
+        },
         "with_conditionals": {
           "conditions": [
             {
@@ -73,13 +64,24 @@
               }
             }
           ]
+        },
+        "good_1": {
+          "conditions": [
+            {
+              "parameters": {
+                "or": [
+                  "good_1"
+                ]
+              }
+            }
+          ]
         }
-      }, 
-      "type": "conditional", 
-      "name": "check_matrix"
-    }, 
+      }
+    },
     {
-      "default": "", 
+      "name": "raises",
+      "type": "conditional",
+      "default": "",
       "values": {
         "CombinatrixException": {
           "conditions": [
@@ -89,28 +91,28 @@
                   "none"
                 ]
               }
-            }, 
+            },
             {
               "parameters": {
                 "or": [
                   "malformed"
                 ]
               }
-            }, 
+            },
             {
               "out_path": {
                 "or": [
                   "none"
                 ]
               }
-            }, 
+            },
             {
               "out_path": {
                 "or": [
                   "missing_dir"
                 ]
               }
-            }, 
+            },
             {
               "parameters": {
                 "or": [
@@ -120,9 +122,7 @@
             }
           ]
         }
-      }, 
-      "type": "conditional", 
-      "name": "raises"
+      }
     }
   ]
 }

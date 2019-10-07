@@ -1,5 +1,5 @@
-import codecs, json, os
-from combinatrix import csvutil, models, constants
+import json, os, csv
+from combinatrix import models, constants
 from combinatrix.exceptions import CombinatrixException, ValidationException
 
 
@@ -9,11 +9,11 @@ def convert_csv(csv_path, params_out_path=None):
     parameters = _csv2parameters(csv_path)
     if params_out_path is not None:
         dir = os.path.dirname(params_out_path)
-        if dir == "": # we were just given a filename for the current directory
+        if dir == "":                                          # we were just given a filename for the current directory
             dir = "."
         if not os.path.exists(dir):
             raise CombinatrixException("The directory for the params_out_path does not exist")
-        with codecs.open(params_out_path, "wb", "utf-8") as f:
+        with open(params_out_path, "w", encoding="utf-8") as f:
             f.write(json.dumps(parameters.as_dict(), indent=2))
     return parameters
 
@@ -21,8 +21,8 @@ def convert_csv(csv_path, params_out_path=None):
 def _csv2parameters(csv_path):
     if not os.path.exists(csv_path) or os.path.isdir(csv_path):
         raise CombinatrixException("csv_path is set to a missing file or to a directory")
-    with codecs.open(csv_path, "rb", "utf-8") as f:
-        reader = csvutil.UnicodeReader(f)
+    with open(csv_path, "r", encoding="utf-8") as f:
+        reader = csv.reader(f)
 
         parameters = models.Parameters()
         try:
@@ -158,7 +158,7 @@ def fromcsv(csv_path, combos_out_path, params_out_path=None):
 
 
 def fromjsonfile(json_path, out_path):
-    with codecs.open(json_path, "rb", "utf-8") as f:
+    with open(json_path, "r", encoding="utf-8") as f:
         j = json.loads(f.read())
     return combine(j, out_path)
 
@@ -200,8 +200,8 @@ def combine(parameters, out_path):
 
     if out_path:
         header = parameters.field_names()
-        with codecs.open(out_path, "wb", "utf-8") as f:
-            writer = csvutil.UnicodeWriter(f)
+        with open(out_path, "w", encoding="utf-8") as f:
+            writer = csv.writer(f)
             writer.writerow(header)
             for combo in combinations:
                 row = [str(combo.get(name, "")) for name in header]
@@ -215,7 +215,7 @@ def _generate_current(fields, parameters, counter):
     For each field, select the value from the list of values (which are consistently ordered)
     that corresponds to the current counter position
     :param fields:
-    :param counters:
+    :param counter:
     :return:
     """
     record = {}
@@ -278,8 +278,7 @@ def _add_conditionals(combo, fields, parameters):
             combo[name] = possible_values[0]
         else:
             raise CombinatrixException("More than one possible value for '{x}'.  For combination: {y} the possible values are: {z}".format(
-                                                x=name, y=combo, z=possible_values)
-                                            )
+                                                x=name, y=combo, z=possible_values))
     return
 
 
@@ -297,15 +296,12 @@ def _conditions_match(combo, match_group):
     return trips == len(list(match_group.keys()))
 
 
-def _add_index(combo, current_index, indices, paramters):
+def _add_index(combo, current_index, indices, parameters):
     for name in indices:
         combo[name] = str(current_index)
     return current_index + 1
 
 
 def load_matrix(source_path):
-    with codecs.open(source_path, "rb", "utf-8") as f:
-        return [p for p in csvutil.UnicodeDictReader(f)]
-
-
-
+    with open(source_path, "r", encoding="utf-8") as f:
+        return [p for p in csv.DictReader(f)]

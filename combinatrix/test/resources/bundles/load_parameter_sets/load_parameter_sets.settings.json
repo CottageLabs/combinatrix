@@ -1,154 +1,156 @@
 {
   "parameters": [
     {
-      "type": "index", 
-      "name": "test_id"
-    }, 
+      "name": "test_id",
+      "type": "index"
+    },
     {
+      "name": "bundle_path",
+      "type": "generated",
       "values": {
         "none": {
           "constraints": {
-            "matrix": {
-              "or": [
-                "not_present"
-              ]
-            }, 
-            "settings_json": {
-              "or": [
-                "not_present"
-              ]
-            }, 
-            "settings_csv_age": {
-              "or": [
-                "-"
-              ]
-            }, 
-            "settings_json_age": {
-              "or": [
-                "-"
-              ]
-            }, 
             "settings_csv": {
               "or": [
                 "not_present"
               ]
-            }, 
+            },
+            "settings_json": {
+              "or": [
+                "not_present"
+              ]
+            },
+            "matrix": {
+              "or": [
+                "not_present"
+              ]
+            },
+            "settings_csv_age": {
+              "or": [
+                "-"
+              ]
+            },
+            "settings_json_age": {
+              "or": [
+                "-"
+              ]
+            },
             "matrix_age": {
               "or": [
                 "-"
               ]
             }
           }
-        }, 
+        },
         "not_exists": {
           "constraints": {
-            "matrix": {
-              "or": [
-                "not_present"
-              ]
-            }, 
-            "settings_json": {
-              "or": [
-                "not_present"
-              ]
-            }, 
-            "settings_csv_age": {
-              "or": [
-                "-"
-              ]
-            }, 
-            "settings_json_age": {
-              "or": [
-                "-"
-              ]
-            }, 
             "settings_csv": {
               "or": [
                 "not_present"
               ]
-            }, 
+            },
+            "settings_json": {
+              "or": [
+                "not_present"
+              ]
+            },
+            "matrix": {
+              "or": [
+                "not_present"
+              ]
+            },
+            "settings_csv_age": {
+              "or": [
+                "-"
+              ]
+            },
+            "settings_json_age": {
+              "or": [
+                "-"
+              ]
+            },
             "matrix_age": {
               "or": [
                 "-"
               ]
             }
           }
-        }, 
+        },
         "exists": {}
-      }, 
-      "type": "generated", 
-      "name": "bundle_path"
-    }, 
+      }
+    },
     {
+      "name": "bundle_name",
+      "type": "generated",
       "values": {
         "none": {
           "constraints": {
-            "matrix": {
-              "or": [
-                "not_present"
-              ]
-            }, 
-            "settings_json": {
-              "or": [
-                "not_present"
-              ]
-            }, 
-            "settings_csv_age": {
-              "or": [
-                "-"
-              ]
-            }, 
-            "settings_json_age": {
-              "or": [
-                "-"
-              ]
-            }, 
             "settings_csv": {
               "or": [
                 "not_present"
               ]
-            }, 
+            },
+            "settings_json": {
+              "or": [
+                "not_present"
+              ]
+            },
+            "matrix": {
+              "or": [
+                "not_present"
+              ]
+            },
+            "settings_csv_age": {
+              "or": [
+                "-"
+              ]
+            },
+            "settings_json_age": {
+              "or": [
+                "-"
+              ]
+            },
             "matrix_age": {
               "or": [
                 "-"
               ]
             }
           }
-        }, 
+        },
         "not_exists": {
           "constraints": {
-            "matrix": {
-              "or": [
-                "not_present"
-              ]
-            }, 
-            "settings_json": {
-              "or": [
-                "not_present"
-              ]
-            }, 
-            "settings_csv_age": {
-              "or": [
-                "-"
-              ]
-            }, 
-            "settings_json_age": {
-              "or": [
-                "-"
-              ]
-            }, 
             "settings_csv": {
               "or": [
                 "not_present"
               ]
-            }, 
+            },
+            "settings_json": {
+              "or": [
+                "not_present"
+              ]
+            },
+            "matrix": {
+              "or": [
+                "not_present"
+              ]
+            },
+            "settings_csv_age": {
+              "or": [
+                "-"
+              ]
+            },
+            "settings_json_age": {
+              "or": [
+                "-"
+              ]
+            },
             "matrix_age": {
               "or": [
                 "-"
               ]
             }
           }
-        }, 
+        },
         "exists": {
           "constraints": {
             "bundle_path": {
@@ -158,34 +160,34 @@
             }
           }
         }
-      }, 
-      "type": "generated", 
-      "name": "bundle_name"
-    }, 
+      }
+    },
     {
+      "name": "name_field",
+      "type": "generated",
       "values": {
-        "none": {}, 
+        "none": {},
         "not_exists": {
           "constraints": {
             "bundle_path": {
               "or": [
                 "exists"
               ]
-            }, 
+            },
             "bundle_name": {
               "or": [
                 "exists"
               ]
             }
           }
-        }, 
+        },
         "exists": {
           "constraints": {
             "bundle_path": {
               "or": [
                 "exists"
               ]
-            }, 
+            },
             "bundle_name": {
               "or": [
                 "exists"
@@ -193,34 +195,34 @@
             }
           }
         }
-      }, 
-      "type": "generated", 
-      "name": "name_field"
-    }, 
+      }
+    },
     {
+      "name": "filters",
+      "type": "generated",
       "values": {
-        "none": {}, 
+        "none": {},
         "single_filter": {
           "constraints": {
             "bundle_path": {
               "or": [
                 "exists"
               ]
-            }, 
+            },
             "bundle_name": {
               "or": [
                 "exists"
               ]
             }
           }
-        }, 
+        },
         "double_filter": {
           "constraints": {
             "bundle_path": {
               "or": [
                 "exists"
               ]
-            }, 
+            },
             "bundle_name": {
               "or": [
                 "exists"
@@ -228,11 +230,11 @@
             }
           }
         }
-      }, 
-      "type": "generated", 
-      "name": "filters"
-    }, 
+      }
+    },
     {
+      "name": "settings_csv",
+      "type": "generated",
       "values": {
         "not_present": {
           "constraints": {
@@ -242,31 +244,31 @@
               ]
             }
           }
-        }, 
+        },
         "present": {
           "constraints": {
             "bundle_path": {
               "or": [
                 "exists"
               ]
-            }, 
-            "settings_csv_age": {
-              "nor": [
-                "-"
-              ]
-            }, 
+            },
             "bundle_name": {
               "or": [
                 "exists"
               ]
+            },
+            "settings_csv_age": {
+              "nor": [
+                "-"
+              ]
             }
           }
         }
-      }, 
-      "type": "generated", 
-      "name": "settings_csv"
-    }, 
+      }
+    },
     {
+      "name": "settings_json",
+      "type": "generated",
       "values": {
         "not_present": {
           "constraints": {
@@ -276,31 +278,31 @@
               ]
             }
           }
-        }, 
+        },
         "present": {
           "constraints": {
             "bundle_path": {
               "or": [
                 "exists"
               ]
-            }, 
-            "settings_json_age": {
-              "nor": [
-                "-"
-              ]
-            }, 
+            },
             "bundle_name": {
               "or": [
                 "exists"
               ]
+            },
+            "settings_json_age": {
+              "nor": [
+                "-"
+              ]
             }
           }
         }
-      }, 
-      "type": "generated", 
-      "name": "settings_json"
-    }, 
+      }
+    },
     {
+      "name": "matrix",
+      "type": "generated",
       "values": {
         "not_present": {
           "constraints": {
@@ -310,234 +312,234 @@
               ]
             }
           }
-        }, 
+        },
         "present": {
           "constraints": {
             "bundle_path": {
               "or": [
                 "exists"
               ]
-            }, 
-            "matrix_age": {
-              "nor": [
-                "-"
-              ]
-            }, 
+            },
             "bundle_name": {
               "or": [
                 "exists"
               ]
+            },
+            "matrix_age": {
+              "nor": [
+                "-"
+              ]
             }
           }
         }
-      }, 
-      "type": "generated", 
-      "name": "matrix"
-    }, 
+      }
+    },
     {
+      "name": "settings_csv_age",
+      "type": "generated",
       "values": {
-        "1": {
-          "constraints": {
-            "settings_json_age": {
-              "nor": [
-                "1"
-              ]
-            }, 
-            "matrix_age": {
-              "nor": [
-                "1"
-              ]
-            }
-          }
-        }, 
+        "-": {},
         "-1": {
           "constraints": {
             "settings_json_age": {
               "nor": [
                 "-1"
               ]
-            }, 
+            },
             "matrix_age": {
               "nor": [
                 "-1"
               ]
             }
           }
-        }, 
-        "-": {}, 
+        },
         "0": {
           "constraints": {
             "settings_json_age": {
               "nor": [
                 "0"
               ]
-            }, 
+            },
             "matrix_age": {
               "nor": [
                 "0"
               ]
             }
           }
-        }
-      }, 
-      "type": "generated", 
-      "name": "settings_csv_age"
-    }, 
-    {
-      "values": {
-        "1": {
-          "constraints": {
-            "matrix_age": {
-              "nor": [
-                "1"
-              ]
-            }, 
-            "settings_csv_age": {
-              "nor": [
-                "1"
-              ]
-            }
-          }
-        }, 
-        "-1": {
-          "constraints": {
-            "matrix_age": {
-              "nor": [
-                "-1"
-              ]
-            }, 
-            "settings_csv_age": {
-              "nor": [
-                "-1"
-              ]
-            }
-          }
-        }, 
-        "-": {}, 
-        "0": {
-          "constraints": {
-            "matrix_age": {
-              "nor": [
-                "0"
-              ]
-            }, 
-            "settings_csv_age": {
-              "nor": [
-                "0"
-              ]
-            }
-          }
-        }
-      }, 
-      "type": "generated", 
-      "name": "settings_json_age"
-    }, 
-    {
-      "values": {
+        },
         "1": {
           "constraints": {
             "settings_json_age": {
               "nor": [
                 "1"
               ]
-            }, 
-            "settings_csv_age": {
+            },
+            "matrix_age": {
               "nor": [
                 "1"
               ]
             }
           }
-        }, 
+        }
+      }
+    },
+    {
+      "name": "settings_json_age",
+      "type": "generated",
+      "values": {
+        "-": {},
         "-1": {
           "constraints": {
-            "settings_json_age": {
+            "settings_csv_age": {
               "nor": [
                 "-1"
               ]
-            }, 
-            "settings_csv_age": {
+            },
+            "matrix_age": {
               "nor": [
                 "-1"
               ]
             }
           }
-        }, 
-        "-": {}, 
+        },
         "0": {
           "constraints": {
-            "settings_json_age": {
-              "nor": [
-                "0"
-              ]
-            }, 
             "settings_csv_age": {
               "nor": [
                 "0"
+              ]
+            },
+            "matrix_age": {
+              "nor": [
+                "0"
+              ]
+            }
+          }
+        },
+        "1": {
+          "constraints": {
+            "settings_csv_age": {
+              "nor": [
+                "1"
+              ]
+            },
+            "matrix_age": {
+              "nor": [
+                "1"
               ]
             }
           }
         }
-      }, 
-      "type": "generated", 
-      "name": "matrix_age"
-    }, 
+      }
+    },
     {
-      "default": "", 
+      "name": "matrix_age",
+      "type": "generated",
+      "values": {
+        "-": {},
+        "-1": {
+          "constraints": {
+            "settings_csv_age": {
+              "nor": [
+                "-1"
+              ]
+            },
+            "settings_json_age": {
+              "nor": [
+                "-1"
+              ]
+            }
+          }
+        },
+        "0": {
+          "constraints": {
+            "settings_csv_age": {
+              "nor": [
+                "0"
+              ]
+            },
+            "settings_json_age": {
+              "nor": [
+                "0"
+              ]
+            }
+          }
+        },
+        "1": {
+          "constraints": {
+            "settings_csv_age": {
+              "nor": [
+                "1"
+              ]
+            },
+            "settings_json_age": {
+              "nor": [
+                "1"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "raises",
+      "type": "conditional",
+      "default": "",
       "values": {
         "CombinatrixException": {
           "conditions": [
             {
-              "settings_json": {
-                "or": [
-                  "not_present"
-                ]
-              }, 
               "settings_csv": {
                 "or": [
                   "not_present"
                 ]
-              }, 
+              },
+              "settings_json": {
+                "or": [
+                  "not_present"
+                ]
+              },
               "matrix": {
                 "or": [
                   "not_present"
                 ]
               }
-            }, 
+            },
             {
               "bundle_path": {
                 "or": [
                   "none"
                 ]
               }
-            }, 
+            },
             {
               "bundle_path": {
                 "or": [
                   "not_exists"
                 ]
               }
-            }, 
+            },
             {
               "bundle_name": {
                 "or": [
                   "none"
                 ]
               }
-            }, 
+            },
             {
               "bundle_name": {
                 "or": [
                   "not_exists"
                 ]
               }
-            }, 
+            },
             {
               "name_field": {
                 "or": [
                   "none"
                 ]
               }
-            }, 
+            },
             {
               "name_field": {
                 "or": [
@@ -547,9 +549,7 @@
             }
           ]
         }
-      }, 
-      "type": "conditional", 
-      "name": "raises"
+      }
     }
   ]
 }

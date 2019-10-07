@@ -11,7 +11,7 @@ class Parameters(object):
         self._make_index()
 
     def add_field(self, name, type):
-        self.data.append({"name" : name, "type" : type})
+        self.data.append({"name": name, "type": type})
         self._index[name] = len(self.data) - 1
 
     def set_default(self, name, default):
@@ -99,7 +99,7 @@ class Parameters(object):
             return self.data[self._index[name]]
 
     def as_dict(self):
-        return {"parameters" : self.data}
+        return {"parameters": self.data}
 
     def _make_index(self):
         for i, obj in enumerate(self.data):
@@ -128,7 +128,7 @@ class ComboIterator(object):
                 if len(list(skip.keys())) > 0:
                     s[i] = skip
 
-            self.counters[gf] = {"c" : 0, "m": len(values) - 1, "s": s}
+            self.counters[gf] = {"c": 0, "m": len(values) - 1, "s": s}
             self._index.append(gf)
 
     def _mirror_to_indices(self, parameters, field, values):
@@ -160,7 +160,6 @@ class ComboIterator(object):
             if self._check_position():
                 return True
 
-        counted = False
         while True:
             counted = False
             for i in range(len(self._index) -1, -1, -1):

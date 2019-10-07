@@ -1,4 +1,4 @@
-import os, json, codecs
+import os, json
 from combinatrix.testintegration import rel2abs
 
 
@@ -10,6 +10,6 @@ class SettingsJSONFactory(object):
             return None
         path = rel2abs(__file__, "..", "resources", "fixtures", ident + ".settings.json")
         if os.path.exists(path):
-            with codecs.open(path, "rb", "utf-8") as f:
+            with open(path, "r", encoding="utf-8") as f:
                 return json.loads(f.read())
         return None
