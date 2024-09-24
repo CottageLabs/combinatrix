@@ -5,7 +5,7 @@ setup(
     version='2.0.0',
     packages=find_packages(),
     install_requires=[
-        "parameterized==0.7"
+        "parameterized~=0.9.0"
     ],
     url='http://cottagelabs.com/',
     author='Cottage Labs',
